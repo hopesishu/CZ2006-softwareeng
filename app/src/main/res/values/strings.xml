@@ -20,11 +20,11 @@
     <string name="hello_first_fragment">Hello first fragment</string>
     <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
     <string name="search_park_connectors">Search Park Connectors</string>
-    <string name="park_connectors">Park Connectors</string>
+<!--    <string name="park_connectors">Park Connectors</string>-->
     <string name="jurong_pcn">Jurong PCN</string>
     <string name="mandai_pcn">Mandai PCN</string>
     <string name="title_activity_hawkercentres">activity_hawkercentres</string>
-    <string name="hawker_centres">Hawker Centres</string>
+<!--    <string name="hawker_centres">Hawker Centres</string>-->
     <string name="search_hawker_centres">Search Hawker Centres</string>
     <string name="jurong_west_hawker_centre_market"><![CDATA[Jurong West Hawker Centre & Market]]></string>
     <string name="taman_jurong_market_food_centre"><![CDATA[Taman Jurong Market & Food Centre]]></string>
