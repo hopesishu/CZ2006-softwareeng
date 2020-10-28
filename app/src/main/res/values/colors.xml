@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#000000</color>
-    <color name="colorPrimaryDark">#000000</color>
-    <color name="colorAccent">#333333</color>
-    <color name="colorPrimaryLight">#E9F8F1</color>
+    <color name="colorPrimary">#673AB7</color>
+    <color name="colorPrimaryDark">#4F2B86</color>
+    <color name="appBackground">#E9EBEE</color>
     <color name="colorWhite">#FFFFFF</color>
-    <color name="colorBackground">#EBEBEB</color>
-    <color name="colorTrendingStart">#00B09B</color>
-    <color name="colorTrendingEnd">#96C93D</color>
-    <color name="colorDivider">#D6D6D6</color>
     <color name="colorBlack">#000000</color>
+    <color name="yellow">#FFFF00</color>
+    <color name="red">#FF0000</color>
+    <color name="green">#32CD32</color>
+    <color name="transparent">#10000000</color>
+
 </resources>

@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/menu">
+
+    <group android:checkableBehavior="single"
+        android:id="@+id/profile_group">
+
+    </group>
+
+    <group>
+        <item
+            android:id="@+id/setting"
+            android:title="Settings" />
+        <item
+            android:id="@+id/signout"
+            android:title="Sign Out" />
+    </group>
+
+
+</menu>

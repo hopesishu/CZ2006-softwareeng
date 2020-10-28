@@ -1,0 +1,332 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <array name="all_countries">
+
+        <item>Afghanistan</item>
+        <item>Armenia</item>
+        <item>Bahrain</item>
+        <item>Bangladesh</item>
+        <item>Bhutan</item>
+        <item>Brunei</item>
+        <item>Cambodia</item>
+        <item>China</item>
+        <item>East Timor</item>
+        <item>Georgia</item>
+        <item>India</item>
+        <item>Indonesia</item>
+        <item>Iran</item>
+        <item>Iraq</item>
+        <item>Israel</item>
+        <item>Japan</item>
+        <item>Kuwait</item>
+        <item>Laos</item>
+        <item>Lebanon</item>
+        <item>Malaysia</item>
+        <item>Maldives</item>
+        <item>Mongolia</item>
+        <item>Myanmar</item>
+        <item>Nepal</item>
+        <item>North Korea</item>
+        <item>Pakistan</item>
+        <item>Philippines</item>
+        <item>Qatar</item>
+        <item>Russia</item>
+        <item>Saudi Arabia</item>
+        <item>South Korea</item>
+        <item>Sri Lanka</item>
+        <item>Syria</item>
+        <item>Thailand</item>
+        <item>Turkey</item>
+        <item>Taiwan</item>
+        <item>United Arab Emirates</item>
+        <item>Vietnam</item>
+        <item>Yemen</item>
+
+        <item>Albania</item>
+        <item>Austria</item>
+        <item>Belarus</item>
+        <item>Belgium</item>
+        <item>Bulgaria</item>
+        <item>Croatia</item>
+        <item>Czech Republic</item>
+        <item>Denmark</item>
+        <item>Finland</item>
+        <item>France</item>
+        <item>Germany</item>
+        <item>Greece</item>
+        <item>Hungary</item>
+        <item>Iceland</item>
+        <item>Ireland</item>
+        <item>Italy</item>
+        <item>Monaco</item>
+        <item>Netherlands</item>
+        <item>Norway</item>
+        <item>Poland</item>
+        <item>Portugal</item>
+        <item>Romania</item>
+        <item>Russia</item>
+        <item>Spain</item>
+        <item>Sweden</item>
+        <item>Switzerland</item>
+        <item>Ukraine</item>
+        <item>United Kingdom</item>
+
+        <item>Bahamas</item>
+        <item>Belize</item>
+        <item>Canada</item>
+        <item>Cayman Islands</item>
+        <item>Costa Rica</item>
+        <item>Cuba</item>
+        <item>Dominican Republic</item>
+        <item>Greenland</item>
+        <item>Haiti</item>
+        <item>Jamaica</item>
+        <item>Mexico</item>
+        <item>Panama</item>
+        <item>Puerto Rico</item>
+        <item>United States of America</item>
+
+        <item>Argentina</item>
+        <item>Bolivia</item>
+        <item>Brazil</item>
+        <item>Chile</item>
+        <item>Colombia</item>
+        <item>Ecuador</item>
+        <item>Paraguay</item>
+        <item>Peru</item>
+        <item>Uruguay</item>
+        <item>Venezuela</item>
+
+        <item>Australia</item>
+        <item>Fiji</item>
+        <item>New Zealand</item>
+        <item>Papua New Guinea</item>
+        <item>Samoa</item>
+        <item>Solomon Islands</item>
+
+        <item>Algeria</item>
+        <item>Angola</item>
+        <item>Cameroon</item>
+        <item>Cape Verde</item>
+        <item>Central African Republic</item>
+        <item>Egypt</item>
+        <item>Ethiopia</item>
+        <item>Ghana</item>
+        <item>Guinea</item>
+        <item>Kenya</item>
+        <item>Liberia</item>
+        <item>Libya</item>
+        <item>Madagascar</item>
+        <item>Morocco</item>
+        <item>Mozambique</item>
+        <item>Niger</item>
+        <item>Nigeria</item>
+        <item>Rwanda</item>
+        <item>Senegal</item>
+        <item>Sierra Leone</item>
+        <item>Somalia</item>
+        <item>South Africa</item>
+        <item>Sudan</item>
+        <item>Swaziland</item>
+        <item>Tunisia</item>
+        <item>Uganda</item>
+        <item>Zambia</item>
+        <item>Zimbabwe</item>
+
+    </array>
+
+
+    <array name="asia_popular_countries">
+        <item>China</item>
+        <item>Hong Kong</item>
+        <item>Malaysia</item>
+        <item>Thailand</item>
+        <item>South Korea</item>
+        <item>Japan</item>
+        <item>Indonesia</item>
+        <item>Taiwan</item>
+    </array>
+
+    <array name="asia_all_countries">
+        <item>Afghanistan</item>
+        <item>Armenia</item>
+        <item>Bahrain</item>
+        <item>Bangladesh</item>
+        <item>Bhutan</item>
+        <item>Brunei</item>
+        <item>Cambodia</item>
+        <item>China</item>
+        <item>East Timor</item>
+        <item>Georgia</item>
+        <item>India</item>
+        <item>Indonesia</item>
+        <item>Iran</item>
+        <item>Iraq</item>
+        <item>Israel</item>
+        <item>Japan</item>
+        <item>Kuwait</item>
+        <item>Laos</item>
+        <item>Lebanon</item>
+        <item>Malaysia</item>
+        <item>Maldives</item>
+        <item>Mongolia</item>
+        <item>Myanmar</item>
+        <item>Nepal</item>
+        <item>North Korea</item>
+        <item>Pakistan</item>
+        <item>Philippines</item>
+        <item>Qatar</item>
+        <item>Russia</item>
+        <item>Saudi Arabia</item>
+        <item>South Korea</item>
+        <item>Sri Lanka</item>
+        <item>Syria</item>
+        <item>Thailand</item>
+        <item>Turkey</item>
+        <item>Taiwan</item>
+        <item>United Arab Emirates</item>
+        <item>Vietnam</item>
+        <item>Yemen</item>
+    </array>
+
+    <array name="europe_popular_countries">
+        <item>Denmark</item>
+        <item>Finland</item>
+        <item>France</item>
+        <item>Italy</item>
+        <item>Norway</item>
+        <item>Sweden</item>
+        <item>Switzerland</item>
+        <item>United Kingdom</item>
+    </array>
+
+    <array name="europe_all_countries">
+        <item>Albania</item>
+        <item>Austria</item>
+        <item>Belarus</item>
+        <item>Belgium</item>
+        <item>Bulgaria</item>
+        <item>Croatia</item>
+        <item>Czech Republic</item>
+        <item>Denmark</item>
+        <item>Finland</item>
+        <item>France</item>
+        <item>Germany</item>
+        <item>Greece</item>
+        <item>Hungary</item>
+        <item>Iceland</item>
+        <item>Ireland</item>
+        <item>Italy</item>
+        <item>Monaco</item>
+        <item>Netherlands</item>
+        <item>Norway</item>
+        <item>Poland</item>
+        <item>Portugal</item>
+        <item>Romania</item>
+        <item>Russia</item>
+        <item>Spain</item>
+        <item>Sweden</item>
+        <item>Switzerland</item>
+        <item>Ukraine</item>
+        <item>United Kingdom</item>
+    </array>
+
+    <array name="north_america_all_countries">
+        <item>Bahamas</item>
+        <item>Belize</item>
+        <item>Canada</item>
+        <item>Cayman Islands</item>
+        <item>Costa Rica</item>
+        <item>Cuba</item>
+        <item>Dominican Republic</item>
+        <item>Greenland</item>
+        <item>Haiti</item>
+        <item>Jamaica</item>
+        <item>Mexico</item>
+        <item>Panama</item>
+        <item>Puerto Rico</item>
+        <item>United States of America</item>
+    </array>
+
+    <array name="north_america_popular_countries">
+        <item>United States of America</item>
+        <item>Bahamas</item>
+        <item>Costa Rica</item>
+        <item>Mexico</item>
+    </array>
+
+    <array name="south_america_all_countries">
+        <item>Argentina</item>
+        <item>Bolivia</item>
+        <item>Brazil</item>
+        <item>Chile</item>
+        <item>Colombia</item>
+        <item>Ecuador</item>
+        <item>Paraguay</item>
+        <item>Peru</item>
+        <item>Uruguay</item>
+        <item>Venezuela</item>
+    </array>
+
+    <array name="south_america_popular_countries">
+        <item>Peru</item>
+        <item>Colombia</item>
+        <item>Ecuador</item>
+        <item>Brazil</item>
+        <item>Chile</item>
+    </array>
+
+    <array name="africa_all_countries">
+        <item>Algeria</item>
+        <item>Angola</item>
+        <item>Cameroon</item>
+        <item>Cape Verde</item>
+        <item>Central African Republic</item>
+        <item>Egypt</item>
+        <item>Ethiopia</item>
+        <item>Ghana</item>
+        <item>Guinea</item>
+        <item>Kenya</item>
+        <item>Liberia</item>
+        <item>Libya</item>
+        <item>Madagascar</item>
+        <item>Morocco</item>
+        <item>Mozambique</item>
+        <item>Niger</item>
+        <item>Nigeria</item>
+        <item>Rwanda</item>
+        <item>Senegal</item>
+        <item>Sierra Leone</item>
+        <item>Somalia</item>
+        <item>South Africa</item>
+        <item>Sudan</item>
+        <item>Swaziland</item>
+        <item>Tunisia</item>
+        <item>Uganda</item>
+        <item>Zambia</item>
+        <item>Zimbabwe</item>
+    </array>
+
+    <array name="africa_popular_countries">
+        <item>Egypt</item>
+        <item>Morocco</item>
+        <item>South Africa</item>
+        <item>Tunisia</item>
+        <item>Zimbabwe</item>
+        <item>Uganda</item>
+        <item>Kenya</item>
+        <item>Swaziland</item>
+    </array>
+
+    <array name="oceania_popular_countries">
+        <item>Australia</item>
+        <item>Fiji</item>
+        <item>New Zealand</item>
+        <item>Papua New Guinea</item>
+        <item>Samoa</item>
+        <item>Solomon Islands</item>
+    </array>
+
+
+</resources>

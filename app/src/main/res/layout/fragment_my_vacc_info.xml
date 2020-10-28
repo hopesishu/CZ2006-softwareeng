@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.example.aavax.ui.homepage.MyVaccInfoFragment">
+
+    <TextView
+        android:id="@+id/vaccineName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="hey "
+        android:textSize="24sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.065" />
+
+    <TextView
+        android:id="@+id/dateTakenText"
+        android:layout_width="100dp"
+        android:layout_height="40dp"
+        android:text="Date Taken:"
+        android:textAlignment="viewEnd"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.234"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/vaccineName"
+        app:layout_constraintVertical_bias="0.118" />
+
+    <TextView
+        android:id="@+id/dateTakenFillText"
+        android:layout_width="115dp"
+        android:layout_height="40dp"
+        android:background="#25673AB7"
+        android:gravity="center_horizontal|center_vertical"
+        android:text="TextView"
+        android:textAlignment="center"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+
+        app:layout_constraintHorizontal_bias="0.492"
+        app:layout_constraintStart_toEndOf="@+id/dateTakenText"
+        app:layout_constraintTop_toBottomOf="@+id/vaccineName"
+        app:layout_constraintVertical_bias="0.118" />
+
+    <TextView
+        android:id="@+id/nextDueFillText"
+        android:layout_width="115dp"
+        android:layout_height="40dp"
+        android:background="#25673AB7"
+        android:gravity="center_horizontal|center_vertical"
+        android:text="TextView"
+        android:textAlignment="gravity"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.492"
+        app:layout_constraintStart_toEndOf="@+id/nextDueText"
+        app:layout_constraintTop_toBottomOf="@+id/dateTakenFillText"
+        app:layout_constraintVertical_bias="0.058" />
+
+    <TextView
+        android:id="@+id/remindMeText"
+        android:layout_width="100dp"
+        android:layout_height="40dp"
+        android:text="Remind Me:"
+        android:textAlignment="viewEnd"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.234"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/nextDueText"
+        app:layout_constraintVertical_bias="0.057" />
+
+    <TextView
+        android:id="@+id/remindMeFillText"
+        android:layout_width="115dp"
+        android:layout_height="40dp"
+        android:background="#25673AB7"
+        android:gravity="center_horizontal|center_vertical"
+        android:text="TextView"
+        android:textAlignment="gravity"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.496"
+        app:layout_constraintStart_toEndOf="@+id/remindMeText"
+        app:layout_constraintTop_toBottomOf="@+id/nextDueFillText"
+        app:layout_constraintVertical_bias="0.058" />
+
+    <TextView
+        android:id="@+id/nextDueText"
+        android:layout_width="100dp"
+        android:layout_height="40dp"
+        android:text="Next Due: "
+        android:textAlignment="viewEnd"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.234"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/dateTakenText"
+        app:layout_constraintVertical_bias="0.058" />
+
+    <Button
+        android:id="@+id/moreInfoText"
+        android:layout_width="236dp"
+        android:layout_height="61dp"
+        android:layout_marginTop="52dp"
+        android:text="More information"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.554"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/remindMeText"
+        app:layout_constraintVertical_bias="0.183" />
+
+    <Button
+        android:id="@+id/editBtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Edit"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,0 +1,278 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/relativeLayout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/appBackground">
+
+    <!--    <androidx.appcompat.widget.Toolbar-->
+    <!--        android:id="@+id/toolbar"-->
+    <!--        android:layout_width="match_parent"-->
+    <!--        android:layout_height="80dp"-->
+    <!--        android:background="@color/colorPrimary"-->
+    <!--        app:layout_constraintStart_toStartOf="parent"-->
+    <!--        app:layout_constraintTop_toTopOf="parent" />-->
+
+    <!--    <TextView-->
+    <!--        android:id="@+id/textView"-->
+    <!--        android:layout_width="wrap_content"-->
+    <!--        android:layout_height="wrap_content"-->
+    <!--        android:layout_marginStart="48dp"-->
+    <!--        android:layout_marginLeft="48dp"-->
+    <!--        android:layout_marginTop="37dp"-->
+    <!--        android:text="@string/continents"-->
+    <!--        android:textAppearance="@style/TextAppearance.AppCompat.Large"-->
+    <!--        android:textColor="@color/white"-->
+    <!--        app:layout_constraintStart_toStartOf="parent"-->
+    <!--        app:layout_constraintTop_toTopOf="parent" />-->
+
+    <TextView
+        android:id="@+id/destination"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginTop="8dp"
+        android:text="@string/destination"
+        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0" />
+
+    <ImageView
+        android:id="@+id/EuropeImg"
+        android:layout_width="match_parent"
+        android:layout_height="220dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginRight="8dp"
+        android:contentDescription="@string/europe"
+        android:scaleType="fitXY"
+        android:tint="#80000000"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/destination"
+        app:srcCompat="@drawable/europe"
+        tools:ignore="VectorDrawableCompat" />
+
+    <TextView
+        android:id="@+id/EuropeTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/montserrat"
+        android:gravity="center"
+        android:text="@string/europe"
+        android:textColor="@color/colorWhite"
+        android:textSize="48sp"
+        app:layout_constraintBottom_toBottomOf="@+id/EuropeImg"
+        app:layout_constraintEnd_toEndOf="@+id/EuropeImg"
+        app:layout_constraintStart_toStartOf="@+id/EuropeImg"
+        app:layout_constraintTop_toTopOf="@+id/EuropeImg" />
+
+    <ImageView
+        android:id="@+id/NorthAmericaImg"
+        android:layout_width="125dp"
+        android:layout_height="220dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginTop="8dp"
+        android:adjustViewBounds="true"
+        android:contentDescription="@string/north_america"
+        android:scaleType="centerCrop"
+        android:tint="#80000000"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/OceaniaImg"
+        app:layout_constraintHorizontal_weight="1"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/EuropeImg"
+        app:srcCompat="@drawable/north_america" />
+
+    <TextView
+        android:id="@+id/NorthAmericaTextView"
+        android:layout_height="wrap_content"
+        android:layout_width="125dp"
+        android:fontFamily="@font/montserrat"
+        android:gravity="center"
+        android:text="@string/north_america"
+        android:textColor="@color/colorWhite"
+        android:textSize="24sp"
+        app:layout_constraintBottom_toBottomOf="@+id/NorthAmericaImg"
+        app:layout_constraintEnd_toEndOf="@+id/NorthAmericaImg"
+        app:layout_constraintHorizontal_bias="0.758"
+        app:layout_constraintStart_toStartOf="@+id/NorthAmericaImg"
+        app:layout_constraintTop_toTopOf="@+id/NorthAmericaImg"
+        app:layout_constraintVertical_bias="0.43" />
+
+    <ImageView
+        android:id="@+id/OceaniaImg"
+        android:layout_width="0sp"
+        android:layout_height="106sp"
+        android:layout_marginStart="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginTop="8dp"
+        android:adjustViewBounds="true"
+        android:contentDescription="@string/oceania"
+        android:scaleType="centerCrop"
+        android:tint="#80000000"
+        app:layout_constraintEnd_toStartOf="@+id/AfricaImg"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintHorizontal_weight="1"
+        app:layout_constraintStart_toEndOf="@+id/NorthAmericaImg"
+        app:layout_constraintTop_toBottomOf="@+id/EuropeImg"
+        app:srcCompat="@drawable/oceania" />
+
+    <TextView
+        android:id="@+id/OceaniaTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/oceania"
+        android:fontFamily="@font/montserrat"
+        android:textColor="@color/colorWhite"
+        android:textSize="24sp"
+        android:gravity="center"
+        app:layout_constraintBottom_toBottomOf="@+id/OceaniaImg"
+        app:layout_constraintEnd_toEndOf="@+id/OceaniaImg"
+        app:layout_constraintStart_toStartOf="@+id/OceaniaImg"
+        app:layout_constraintTop_toTopOf="@+id/OceaniaImg"
+        tools:layout_editor_absoluteX="174dp"
+        tools:layout_editor_absoluteY="304dp" />
+
+    <ImageView
+        android:id="@+id/AfricaImg"
+        android:layout_width="0sp"
+        android:layout_height="106sp"
+        android:layout_marginStart="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginRight="8dp"
+        android:adjustViewBounds="true"
+        android:contentDescription="@string/africa"
+        android:scaleType="centerCrop"
+        android:tint="#80000000"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintHorizontal_weight="1"
+        app:layout_constraintStart_toEndOf="@+id/OceaniaImg"
+        app:layout_constraintTop_toBottomOf="@+id/EuropeImg"
+        app:srcCompat="@drawable/africa" />
+
+    <TextView
+        android:id="@+id/AfricaTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/africa"
+        android:fontFamily="@font/montserrat"
+        android:textColor="@color/colorWhite"
+        android:textSize="24sp"
+        android:gravity="center"
+        app:layout_constraintBottom_toBottomOf="@+id/AfricaImg"
+        app:layout_constraintEnd_toEndOf="@+id/AfricaImg"
+        app:layout_constraintStart_toStartOf="@+id/AfricaImg"
+        app:layout_constraintTop_toTopOf="@+id/AfricaImg" />
+
+    <ImageView
+        android:id="@+id/AsiaImg"
+        android:layout_width="0sp"
+        android:layout_height="106sp"
+        android:layout_marginStart="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginRight="8dp"
+        android:adjustViewBounds="true"
+        android:contentDescription="@string/asia"
+        android:scaleType="centerCrop"
+        android:tint="#80000000"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toEndOf="@+id/NorthAmericaImg"
+        app:layout_constraintTop_toBottomOf="@+id/OceaniaImg"
+        app:srcCompat="@drawable/asia" />
+
+    <TextView
+        android:id="@+id/AsiaTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/asia"
+        android:fontFamily="@font/montserrat"
+        android:textColor="@color/colorWhite"
+        android:textSize="24sp"
+        android:gravity="center"
+        app:layout_constraintBottom_toBottomOf="@+id/AsiaImg"
+        app:layout_constraintEnd_toEndOf="@+id/AsiaImg"
+        app:layout_constraintStart_toStartOf="@+id/AsiaImg"
+        app:layout_constraintTop_toTopOf="@+id/AsiaImg" />
+
+    <ImageView
+        android:id="@+id/SouthAmericaImg"
+        android:layout_width="0sp"
+        android:layout_height="106sp"
+        android:layout_marginStart="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginTop="8dp"
+        android:adjustViewBounds="true"
+        android:contentDescription="@string/south_america"
+        android:scaleType="centerCrop"
+        android:tint="#80000000"
+        app:layout_constraintEnd_toStartOf="@+id/AntarcticaImg"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/NorthAmericaImg"
+        app:srcCompat="@drawable/south_america" />
+
+    <TextView
+        android:id="@+id/SouthAmericaTextView"
+        android:layout_width="120sp"
+        android:layout_height="wrap_content"
+        android:text="@string/south_america"
+        android:fontFamily="@font/montserrat"
+        android:textColor="@color/colorWhite"
+        android:textSize="24sp"
+        android:gravity="center"
+        app:layout_constraintBottom_toBottomOf="@+id/SouthAmericaImg"
+        app:layout_constraintEnd_toEndOf="@+id/SouthAmericaImg"
+        app:layout_constraintStart_toStartOf="@+id/SouthAmericaImg"
+        app:layout_constraintTop_toTopOf="@+id/SouthAmericaImg" />
+
+    <ImageView
+        android:id="@+id/AntarcticaImg"
+        android:layout_width="0sp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginRight="8dp"
+        android:adjustViewBounds="true"
+        android:contentDescription="@string/antarctica"
+        android:scaleType="centerCrop"
+        android:tint="#80000000"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/SouthAmericaImg"
+        app:layout_constraintTop_toBottomOf="@+id/AsiaImg"
+        app:srcCompat="@drawable/antarctica" />
+
+    <TextView
+        android:id="@+id/AntarcticaTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/antarctica"
+        android:fontFamily="@font/montserrat"
+        android:textColor="@color/colorWhite"
+        android:textSize="24sp"
+        android:gravity="center"
+        app:layout_constraintBottom_toBottomOf="@+id/AntarcticaImg"
+        app:layout_constraintEnd_toEndOf="@+id/AntarcticaImg"
+        app:layout_constraintStart_toStartOf="@+id/AntarcticaImg"
+        app:layout_constraintTop_toTopOf="@+id/AntarcticaImg" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

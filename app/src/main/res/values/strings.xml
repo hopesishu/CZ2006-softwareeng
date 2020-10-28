@@ -1,31 +1,129 @@
 <resources>
-    <string name="app_name">ConnectMe</string>
-    <string name="welcome">Welcome!</string>
-    <string name="park_connectors">Park Connectors</string>
+    <string name="app_name">AAVax</string>
+    <string name="title_home">Home</string>
+    <string name="title_travel">Travel</string>
+    <string name="title_reminders">Reminders</string>
+    <string name="title_profile">Profile</string>
+    <string name="my_vaccines">My Vaccinations</string>
+    <string name="continents">Continents</string>
+    <string name="intent_message">Intent</string>
+    <string name="title_activity_hawkercentres">Activity Hawker Centre</string>
+    <string name="title_activity_parkconnector">Activity Park Connector</string>
     <string name="hawker_centres">Hawker Centres</string>
+    <string name="search_hawker_centres">Search Hawker Centres</string>
+    <string name="jurong_west_hawker_centre_market">Jurong West Hawker Centre Market</string>
+    <string name="taman_jurong_market_food_centre">Taman Jurong Market Food Centres</string>
+    <string name="park_connectors">Park Connectors</string>
+    <string name="search_park_connectors">Search Park Connectors</string>
+    <string name="jurong_pcn">Jurong Park Connector</string>
+    <string name="mandai_pcn">Mandai Park Connector</string>
+    <string name="hello_first_fragment">Hello First Fragment</string>
+    <string name="next">Next</string>
+    <string name="previous">Previous</string>
     <string name="home">Home</string>
     <string name="map">Map</string>
     <string name="info">Info</string>
-    <string name="based_on_your_current_location_the_nearest_park_connector_is">Based on your current location, the nearest park connector is:</string>
-    <string name="pcn">Based on your current location, the nearest Park Connector is :</string>
-    <string name="what_do_you_want_to_search_for">What do you want to search for?</string>
-    <string name="welcomeText">Welcome!</string>
-    <string name="title_activity_parkconnector">activity_parkconnector</string>
-    <!-- Strings used for fragments for navigation -->
-    <string name="first_fragment_label">First Fragment</string>
-    <string name="second_fragment_label">Second Fragment</string>
-    <string name="next">Next</string>
-    <string name="previous">Previous</string>
+    <string name="first_fragment_label">First Fragment Labek</string>
+    <string name="second_fragment_label">Second Fragment Labek</string>
 
-    <string name="hello_first_fragment">Hello first fragment</string>
-    <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
-    <string name="search_park_connectors">Search Park Connectors</string>
-    <string name="park_connectors">Park Connectors</string>
-    <string name="jurong_pcn">Jurong PCN</string>
-    <string name="mandai_pcn">Mandai PCN</string>
-    <string name="title_activity_hawkercentres">activity_hawkercentres</string>
-    <string name="hawker_centres">Hawker Centres</string>
-    <string name="search_hawker_centres">Search Hawker Centres</string>
-    <string name="jurong_west_hawker_centre_market"><![CDATA[Jurong West Hawker Centre & Market]]></string>
-    <string name="taman_jurong_market_food_centre"><![CDATA[Taman Jurong Market & Food Centre]]></string>
+
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+
+    <string name="destination">Destination</string>
+
+    <string-array name="continents">
+        <item>Europe</item>
+        <item>Oceania</item>
+        <item>Asia</item>
+        <item>Africa</item>
+        <item>North America</item>
+        <item>South America</item>
+        <item>Antarctica</item>
+    </string-array>
+
+    <string-array name="vaccines">
+        <item>Bacille Calmette-Guerin</item>
+        <item>Cholera</item>
+        <item>Hepatitis A</item>
+        <item>Hepatitis B</item>
+        <item>Human Papillomavirus</item>
+        <item>Influenza (Flu)</item>
+        <item>Japanese Encephalitis</item>
+        <item>Measles</item>
+        <item>Polio</item>
+        <item>Shingles</item>
+        <item>Tdap</item>
+        <item>Typhoid</item>
+        <item>Varicella</item>
+        <item>Yellow Fever</item>
+    </string-array>
+
+
+    <string name="europe">Europe</string>
+    <string name="oceania">Oceania</string>
+    <string name="asia">Asia</string>
+    <string name="africa">Africa</string>
+    <string name="north_america">North America</string>
+    <string name="south_america">South America</string>
+    <string name="antarctica">Antarctica</string>
+
+
+    <string name="title_activity_login">Login</string>
+    <string name="create_account">Create account</string>
+    <string name="new_account">New Account</string>
+    <string name="forgot_password">"Forgot password\?"</string>
+    <string name="prompt_email">Email Address</string>
+    <string name="prompt_password">Password</string>
+    <string name="action_sign_in">Sign in or register</string>
+    <string name="action_sign_in_short">Sign in</string>
+    <string name="welcome">"Welcome !"</string>
+    <string name="invalid_username">Not a valid username</string>
+    <string name="invalid_password">Password must be >5 characters</string>
+    <string name="login_failed">"Login failed"</string>
+
+    <!-- Create account form -->
+    <string name="confirm_password">"Confirm Password"</string>
+    <string name="first_name">"First Name"</string>
+    <string name="last_name">"Last Name"</string>
+    <string name="dob">"Date Of Birth"</string>
+
+    <!-- Main home vaccine page -->
+    <string name="taken">"Taken"</string>
+    <string name="popular_search">Popular / Search</string>
+    <string name="recommended_vaccine">recommended vaccine</string>
+    <string name="clinic_name">Clinic name</string>
+    <string-array name="clinics">
+        <item>clinic 1</item>
+        <item>clinic 2</item>
+        <item>clinic 3</item>
+        <item>clinic 4</item>
+        <item>clinic 5</item>
+    </string-array>
+    <string name="distance">Distance</string>
+    <string-array name="distances">
+        <item>distance 1</item>
+        <item>distance 2</item>
+        <item>distance 3</item>
+        <item>distance 4</item>
+        <item>distance 5</item>
+    </string-array>
+    <string name="title_activity_maps">Map</string>
+
+    <!--    <string-array name="vaccines">-->
+<!--        <item>Influenza</item>-->
+<!--        <item>MMR</item>-->
+<!--        <item>Tdap</item>-->
+<!--    </string-array>-->
+
+    <!-- Profiles  -->
+
+    <string name="new_profile">New Profile</string>
+    <string name="create_profile">Create Profile</string>
+    <string name="add_edit">add/edit</string>
+
 </resources>
