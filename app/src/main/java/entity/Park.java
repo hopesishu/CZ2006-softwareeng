@@ -1,4 +1,4 @@
-package AccountManager;
+package entity;
 
 public class Park {
     private String name;

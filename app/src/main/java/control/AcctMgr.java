@@ -1,4 +1,4 @@
-package AccountManager;
+package control;
 
 
 import android.app.Activity;
@@ -30,6 +30,9 @@ import com.google.firebase.database.ValueEventListener;
 import org.greenrobot.eventbus.EventBus;
 
 import java.util.HashMap;
+
+import entity.Account;
+import entity.AccountMgrInterface;
 
 /**
  * implements AccountMgrInterface

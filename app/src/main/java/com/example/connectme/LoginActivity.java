@@ -12,8 +12,8 @@ import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
 
 
-import AccountManager.AcctMgr;
-import AccountManager.AccountMgrInterface;
+import control.AcctMgr;
+import entity.AccountMgrInterface;
 
 public class LoginActivity extends AppCompatActivity {
 

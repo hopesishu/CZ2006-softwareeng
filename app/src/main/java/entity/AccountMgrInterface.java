@@ -1,7 +1,9 @@
-package AccountManager;
+package entity;
 
 import android.app.Activity;
 import android.view.View;
+
+import control.AcctMgr;
 
 public interface AccountMgrInterface {
     public void changePassword(String password, String uId);

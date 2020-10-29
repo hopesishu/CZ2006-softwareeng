@@ -13,8 +13,8 @@ import androidx.appcompat.widget.Toolbar;
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 
-import AccountManager.AccountMgrInterface;
-import AccountManager.AcctMgr;
+import entity.AccountMgrInterface;
+import control.AcctMgr;
 
 /**
  * create new account
