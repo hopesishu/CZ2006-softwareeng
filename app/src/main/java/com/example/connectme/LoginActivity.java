@@ -32,6 +32,7 @@ public class LoginActivity extends AppCompatActivity {
         final ProgressBar progressBar = findViewById(R.id.loading);
         final TextView createAccount = findViewById(R.id.create_account);
         final TextView forgotPassword = findViewById(R.id.forgot_password);
+        final Button profileButton = findViewById(R.id.profile);
 
         loginButton.setOnClickListener(v -> {
             final String email = getInput(emailEditText);
@@ -62,11 +63,11 @@ public class LoginActivity extends AppCompatActivity {
                 finish();
         });
 
-        final Button profile = findViewById(R.id.profile);
-        profile.setOnClickListener(v -> {
-            Intent intent = new Intent(this, activity_profile.class);
-            startActivity(intent);
-            finish();
+
+        profileButton.setOnClickListener(v -> {
+                Intent intent = new Intent(profileButton.getContext(), activity_profile.class);
+                startActivity(intent);
+                finish();
         });
     }
 
