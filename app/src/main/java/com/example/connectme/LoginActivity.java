@@ -61,6 +61,13 @@ public class LoginActivity extends AppCompatActivity {
                 startActivity(intent);
                 finish();
         });
+
+        final Button profile = findViewById(R.id.profile);
+        profile.setOnClickListener(v -> {
+            Intent intent = new Intent(this, activity_profile.class);
+            startActivity(intent);
+            finish();
+        });
     }
 
     public String getInput(EditText editText) {
