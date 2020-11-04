@@ -160,15 +160,17 @@
                     android:id="@+id/cardPCN"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-
-                    android:layout_marginTop="25dp"
-                    android:layout_marginEnd="25dp"
+                    android:layout_marginTop="10dp"
                     android:layout_marginStart="25dp"
+                    android:layout_marginEnd="25dp"
+                    android:layout_marginBottom="25dp"
+
                     app:cardBackgroundColor="@color/colorWhite"
                     app:cardCornerRadius="8dp"
-                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent">
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent">
 
                     <LinearLayout
                         android:layout_width="match_parent"

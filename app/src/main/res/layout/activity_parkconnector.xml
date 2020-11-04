@@ -130,6 +130,14 @@
 
         </androidx.cardview.widget.CardView>
 
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:id="@+id/bottomNavigationView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:backgroundTint="@color/colorWhite"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:menu="@menu/menu_bottom_navigation"/>
+
     <include layout="@layout/content_activity_parkconnector" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
