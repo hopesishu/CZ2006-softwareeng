@@ -15,7 +15,7 @@ public class activity_profile extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         profileMgr = new ProfileMgr();
-        String apple = user.getUid();
+//        String apple = user.getUid();
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.activity_profile);
@@ -23,8 +23,8 @@ public class activity_profile extends AppCompatActivity {
         TextView dateOfBirth = (TextView) findViewById(R.id.date_of_birth);
 
         //profileMgr.retrieveCurrentProfileName(value -> profile_name.setText(value), uId);
-        profile_name.setText("Name: " + apple);
-        dateOfBirth.setText("Date Of Birth: " + apple);
+//        profile_name.setText("Name: " + apple);
+//        dateOfBirth.setText("Date Of Birth: " + apple);
 
 
     }

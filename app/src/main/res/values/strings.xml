@@ -1,6 +1,13 @@
 <resources>
     <string name="app_name">ConnectMe</string>
+    <string name="welcome">Welcome!</string>
     <string name="title_home">Home</string>
+    <string name="based_on_your_current_location_the_nearest_park_connector_is">Based on your current location, the nearest park connector is:</string>
+    <string name="pcn">Based on your current location, the nearest Park Connector is :</string>
+    <string name="what_do_you_want_to_search_for">What do you want to search for?</string>
+    <string name="title_activity_parkconnector">activity_parkconnector</string>
+    <!-- Strings used for fragments for navigation -->
+
     <string name="title_travel">Travel</string>
     <string name="title_reminders">Reminders</string>
     <string name="title_profile">Profile</string>
@@ -8,7 +15,6 @@
     <string name="continents">Continents</string>
     <string name="intent_message">Intent</string>
     <string name="title_activity_hawkercentres">Activity Hawker Centre</string>
-    <string name="title_activity_parkconnector">Activity Park Connector</string>
     <string name="hawker_centres">Hawker Centres</string>
     <string name="search_hawker_centres">Search Hawker Centres</string>
     <string name="jurong_west_hawker_centre_market">Jurong West Hawker Centre Market</string>
@@ -23,8 +29,9 @@
     <string name="home">Home</string>
     <string name="map">Map</string>
     <string name="info">Info</string>
-    <string name="first_fragment_label">First Fragment Labek</string>
-    <string name="second_fragment_label">Second Fragment Labek</string>
+    <string name="first_fragment_label">First Fragment Label</string>
+    <string name="second_fragment_label">Second Fragment Label</string>
+    <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
 
 
 
@@ -81,7 +88,6 @@
     <string name="prompt_password">Password</string>
     <string name="action_sign_in">Sign in or register</string>
     <string name="action_sign_in_short">Sign in</string>
-    <string name="welcome">"Welcome !"</string>
     <string name="invalid_username">Not a valid username</string>
     <string name="invalid_password">Password must be >5 characters</string>
     <string name="login_failed">"Login failed"</string>
