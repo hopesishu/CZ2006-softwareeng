@@ -30,7 +30,9 @@ public class activity_hawkercentres extends AppCompatActivity {
                         //overridePendingTransition(0,0);
                         //return true;
                     case R.id.navigationInfo:
-                        //startActivity(new Intent(getApplicationContext(), activity_info.class));
+                        startActivity(new Intent(getApplicationContext(), activity_settings.class));
+                        overridePendingTransition(0,0);
+                        return true;
                     case R.id.navigationHome:
                         startActivity(new Intent(getApplicationContext(), MainActivity.class));
                         overridePendingTransition(0,0);

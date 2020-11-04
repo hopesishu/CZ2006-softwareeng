@@ -131,5 +131,11 @@
     <string name="new_profile">New Profile</string>
     <string name="create_profile">Create Profile</string>
     <string name="add_edit">add/edit</string>
+    <string name="settings">Settings</string>
+    <string name="settings_header">Settings</string>
+    <string name="title_activity_settings">title_activity_settings</string>
+    <string name="title_activity_profile">title_activity_profile</string>
+    <string name="profile">Profile</string>
+    <string name="date_of_birth">Date of birth:</string>
 
 </resources>

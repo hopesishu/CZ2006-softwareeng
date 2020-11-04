@@ -9,6 +9,6 @@
         android:icon="@drawable/map_icon"/>
 
     <item android:id="@+id/navigationInfo"
-        android:title="@string/info"
+        android:title="@string/settings"
         android:icon="@drawable/info_icon"/>
 </menu>
