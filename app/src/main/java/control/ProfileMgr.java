@@ -84,6 +84,36 @@ public class ProfileMgr implements ProfileMgrInterface {
     }
 
     /**
+     * retrieve DOB of current profile
+     * @param myCallback
+     * @param Uid
+     */
+    @Override
+    public void retrieveCurrentDOB(final MyCallbackString myCallback, final String Uid)
+    {
+        database = FirebaseDatabase.getInstance();
+        userRef = database.getReference("users");
+        userRef.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                String dateOfBirth;
+                for (DataSnapshot data : dataSnapshot.child(Uid).child("profiles").getChildren()) {
+                    if (data.child("thisProfile").getValue(boolean.class)) {
+                        dateOfBirth = data.child("dateOfBirth").getValue(String.class);
+                        myCallback.onCallback(dateOfBirth);
+                    }
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+    }
+
+
+    /**
      * retrieve particular profile with userID and profileID
      * @param myCallback
      * @param uId
