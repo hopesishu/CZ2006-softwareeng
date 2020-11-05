@@ -12,11 +12,21 @@
         <activity
             android:name=".activity_hawkercentres"
             android:label="@string/title_activity_hawkercentres"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:theme="@style/AppTheme.NoActionBar"/>
         <activity
             android:name=".activity_parkconnector"
             android:label="@string/title_activity_parkconnector"
             android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".activity_settings"
+            android:label="@string/title_activity_settings"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".activity_profile"
+            android:label="@string/title_activity_profile"
+            android:theme="@style/AppTheme.NoActionBar" />
+
+
         <activity android:name=".LoginActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -24,9 +34,10 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
         <activity android:name=".MainActivity"></activity>
         <activity android:name=".CreateAccountActivity"></activity>
-        <activity android:name=".activity_profile"></activity>
+
 
     </application>
 

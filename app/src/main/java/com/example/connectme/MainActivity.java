@@ -37,11 +37,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                 switch(item.getItemId()){
                     case R.id.navigationMap:
-                        //startActivity(new Intent(getApplicationContext(), activity_map.class));
-                        //overridePendingTransition(0,0);
-                        //return true;
+                        return true;
                     case R.id.navigationInfo:
-                        //startActivity(new Intent(getApplicationContext(), activity_info.class));
+                        startActivity(new Intent(MainActivity.this, activity_settings.class));
+                        overridePendingTransition(0,0);
+                        return true;
                     case R.id.navigationHome:
                         return true;
                 }

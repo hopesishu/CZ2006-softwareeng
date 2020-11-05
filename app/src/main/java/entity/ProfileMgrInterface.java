@@ -6,6 +6,7 @@ import control.ProfileMgr;
 public interface ProfileMgrInterface {
     public void retrieveSubprofileNameAndID(final ProfileMgr.MyCallbackHashMap myCallback, final String Uid);
     public void retrieveCurrentProfileName(final ProfileMgr.MyCallbackString myCallback, final String Uid);
+    public void retrieveCurrentDOB(final ProfileMgr.MyCallbackString myCallback, final String Uid);
     public void retrieveProfile(ProfileMgr.MyCallbackProfile myCallback, String uId, String pId);
     public void editProfile(final String uId,String name);
     public void editProfile(final String uId,String pId ,String name, String dob);
