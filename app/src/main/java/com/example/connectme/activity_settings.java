@@ -25,7 +25,7 @@ public class activity_settings extends AppCompatActivity {
 
     ListView listView;
     String mTitle[] = {"Profile", "About Us", "Contact Us", "Feedback", "Logout"};
-    int images[] = {R.drawable.info_icon, R.drawable.info_icon, R.drawable.info_icon, R.drawable.info_icon, R.drawable.info_icon};
+    int images[] = {R.drawable.ic_account_circle_black_24dp, R.drawable.ic_info_24dp, R.drawable.ic_mail_24dp, R.drawable.ic_feedback_24dp, R.drawable.ic_logout_24dp};
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
