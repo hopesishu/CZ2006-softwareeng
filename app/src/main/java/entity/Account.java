@@ -11,6 +11,7 @@ public class Account {
     private String email;
     private String password;
     private ArrayList<Profile> profiles;
+    private ArrayList<History> history;
 
     public Account(String email, String password, ArrayList<Profile> profiles) {
         this.email = email;
@@ -24,6 +25,8 @@ public class Account {
         this.password = password;
         profiles = new ArrayList<>();
         profiles.add(new Profile(firstName+" "+lastName, dob));
+        history = new ArrayList<>(10);
+        history.add((new History("", "")));
     }
 
     public String getEmail() {
@@ -49,4 +52,13 @@ public class Account {
     public void setProfiles(ArrayList<Profile> profiles) {
         this.profiles = profiles;
     }
+
+    public ArrayList<History> getHistory() {
+        return history;
+    }
+
+    public void setHistory(ArrayList<History> history) {
+        this.history = history;
+    }
+
 }
