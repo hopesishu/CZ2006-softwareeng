@@ -46,12 +46,14 @@ public class AcctMgr implements AccountMgrInterface {
     private String userID;
     private DatabaseReference myRef;
     private FirebaseDatabase mFirebaseDatabase;
+    private HistoryMgr historyMgr;
 
     public AcctMgr()
     {
         mAuth = FirebaseAuth.getInstance();
         mFirebaseDatabase = FirebaseDatabase.getInstance();
         myRef = mFirebaseDatabase.getReference();
+        historyMgr = new HistoryMgr();
     }
 
 
@@ -126,15 +128,10 @@ public class AcctMgr implements AccountMgrInterface {
                         Toast.makeText(activity, "User Created.", Toast.LENGTH_SHORT).show();
                         userID = mAuth.getCurrentUser().getUid();
                         System.out.println("userid" + userID);
-//                        Date date = Calendar.getInstance().getTime();
-//                        DateFormat dateFormat = new SimpleDateFormat("yyyy-mm-dd hh:mm:ss");
-//                        String strDate = dateFormat.format(date);
-//                        ArrayList<String> historyList = new ArrayList();
-//                        historyList.add("nil");
-//                        History historylist = new History(strDate, historyList);
+
                         Account user = new Account(email, password, firstName, lastName, dob);
                         myRef.child("users").child(userID).setValue(user);
-
+                        historyMgr.addHistory("Jurong West", userID);
 
 
 
@@ -147,6 +144,12 @@ public class AcctMgr implements AccountMgrInterface {
 
 
             activity.startActivity(new Intent(activity.getApplicationContext(), LoginActivity.class));
+        }
+    }
+
+    public void feedBack(final String feedback) {
+        if (!feedback.equals("")) {
+            myRef.child("feedback").push().setValue(feedback);
         }
     }
 
