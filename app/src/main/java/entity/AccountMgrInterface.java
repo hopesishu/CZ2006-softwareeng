@@ -13,4 +13,5 @@ public interface AccountMgrInterface {
     public void createAccount(String email, String password, String firstName, String lastName, String dob, Activity activity);
     public void signIn(String email, String password, Activity activity);
     public void deleteAcc(String pw, View view, Activity activity, String uId);
+    public void addFeedback(final String feedback);
 }

@@ -64,8 +64,8 @@ public class HistoryMgr implements HistoryMgrInterface {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 for (DataSnapshot data : dataSnapshot.getChildren()) {
-                    String pastDate = data.child("historyDate").getValue().toString();
-                    String pastLocation = data.child("location").getValue().toString();
+                    String pastDate = data.child("0").child("historyDate").getValue().toString();
+                    String pastLocation = data.child("0").child("location").getValue().toString();
                     Log.d("error", "onDataChange: ");
                     history.add(new History(pastDate, pastLocation));
                 }

@@ -27,8 +27,6 @@ public class Account {
         profiles.add(new Profile(firstName+" "+lastName, dob));
         history = new ArrayList<>(10);
         history.add((new History("", "")));
-        history.add((new History("1", "1")));
-        history.add((new History("2", "2")));
     }
 
     public String getEmail() {

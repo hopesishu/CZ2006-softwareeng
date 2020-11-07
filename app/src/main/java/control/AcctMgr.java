@@ -131,7 +131,7 @@ public class AcctMgr implements AccountMgrInterface {
 
                         Account user = new Account(email, password, firstName, lastName, dob);
                         myRef.child("users").child(userID).setValue(user);
-                        historyMgr.addHistory("Jurong West", userID);
+
 
 
 
@@ -147,7 +147,7 @@ public class AcctMgr implements AccountMgrInterface {
         }
     }
 
-    public void feedBack(final String feedback) {
+    public void addFeedback(final String feedback) {
         if (!feedback.equals("")) {
             myRef.child("feedback").push().setValue(feedback);
         }
