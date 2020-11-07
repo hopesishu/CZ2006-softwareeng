@@ -25,7 +25,10 @@
             android:name=".activity_profile"
             android:label="@string/title_activity_profile"
             android:theme="@style/AppTheme.NoActionBar" />
-
+        <activity
+            android:name=".SearchActivity"
+            android:label="@string/title_activity_profile"
+            android:theme="@style/AppTheme.NoActionBar" />
 
         <activity android:name=".LoginActivity">
             <intent-filter>
@@ -37,6 +40,7 @@
 
         <activity android:name=".MainActivity"></activity>
         <activity android:name=".CreateAccountActivity"></activity>
+
 
 
     </application>

@@ -27,6 +27,7 @@
     <string name="next">Next</string>
     <string name="previous">Previous</string>
     <string name="home">Home</string>
+    <string name="search">Search</string>
     <string name="map">Map</string>
     <string name="info">Info</string>
     <string name="first_fragment_label">First Fragment Label</string>
@@ -135,6 +136,7 @@
     <string name="settings_header">Settings</string>
     <string name="title_activity_settings">title_activity_settings</string>
     <string name="title_activity_profile">title_activity_profile</string>
+    <string name="title_activity_search">title_activity_search</string>
     <string name="profile">Profile</string>
     <string name="date_of_birth">Date of birth:</string>
 
