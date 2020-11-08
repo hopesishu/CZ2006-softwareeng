@@ -38,6 +38,7 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ViewHo
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
+//        change to retrieve address from api
         holder.rowCountTextView.setText(String.valueOf(position));
         holder.textView.setText(moviesList.get(position));
     }

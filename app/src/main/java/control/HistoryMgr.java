@@ -58,18 +58,18 @@ public class HistoryMgr implements HistoryMgrInterface {
 
     public void getHistory(final MyCallbackHistory myCallback, final String Uid) {
         database = FirebaseDatabase.getInstance();
-        history = new ArrayList<>();
         userRef = database.getReference("users").child(Uid).child("history");
         userRef.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
+                String historyStr = ".";
                 for (DataSnapshot data : dataSnapshot.getChildren()) {
                     String pastDate = data.child("0").child("historyDate").getValue().toString();
                     String pastLocation = data.child("0").child("location").getValue().toString();
                     Log.d("error", "onDataChange: ");
-                    history.add(new History(pastDate, pastLocation));
+                    historyStr = historyStr + pastLocation + "," + pastDate;
                 }
-                myCallback.onCallback(history);
+                myCallback.onCallback(historyStr);
             }
 
             @Override
@@ -83,7 +83,7 @@ public class HistoryMgr implements HistoryMgrInterface {
 
 
     public interface MyCallbackHistory{
-        void onCallback(ArrayList<History> history);
+        void onCallback(String value);
     }
 
     public interface MyCallbackString {
