@@ -22,14 +22,16 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ViewHo
     private static final String TAG = "RecyclerAdapter";
     List<String> nameList;
     List<String> nameListAll;
+    List<String> nameListForAddress;
     List<String> addressList;
 
     public RecyclerAdapter(List<String> nameList, List<String> addressList) {
         this.nameList = nameList;
         this.addressList = addressList;
+        nameListForAddress = new ArrayList<>();
+        nameListForAddress.addAll(nameList);
         nameListAll = new ArrayList<>();
         nameListAll.addAll(nameList);
-        addressList = new ArrayList<>();
     }
 
     @NonNull
@@ -43,9 +45,18 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ViewHo
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
+        int addressPos = 0;
 //        change to retrieve address from api
-        holder.rowCountTextView.setText(addressList.get(position));
         holder.textView.setText(nameList.get(position));
+        for (String item : nameListForAddress)
+        {
+            if (item == nameList.get(position))
+            {
+                break;
+            }
+            addressPos++;
+        }
+        holder.rowCountTextView.setText(addressList.get(addressPos));
     }
 
     @Override

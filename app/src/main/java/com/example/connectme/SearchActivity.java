@@ -44,6 +44,22 @@ public class SearchActivity extends AppCompatActivity {
         anotherList.add("polyline");
         listOfLists.add(anotherList);
 
+        ArrayList<String> anotherList2 = new ArrayList<String>();
+
+        anotherList2.add("Ellias Mall Hawker");
+        anotherList2.add("Pasir Ris");
+        anotherList2.add("url");
+        anotherList2.add("polyline");
+        listOfLists.add(anotherList2);
+
+        ArrayList<String> anotherList3 = new ArrayList<String>();
+
+        anotherList3.add("Tampines Hawker");
+        anotherList3.add("Tampines");
+        anotherList3.add("url");
+        anotherList3.add("polyline");
+        listOfLists.add(anotherList3);
+
         nameList = new ArrayList<>();
         addressList = new ArrayList<>();
         urlList = new ArrayList<>();
