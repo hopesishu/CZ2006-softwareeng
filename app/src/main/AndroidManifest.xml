@@ -33,6 +33,10 @@
         <activity
             android:name=".MainActivity"
             android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".MapsActivity"
+            android:theme="@style/AppTheme.NoActionBar" />
+
 
 
         <activity android:name=".LoginActivity"
@@ -44,7 +48,8 @@
             </intent-filter>
         </activity>
 
-        <activity android:name=".SearchActivity"></activity>
+<!--        <activity android:name=".SearchActivity"></activity>-->
+
 
 
 

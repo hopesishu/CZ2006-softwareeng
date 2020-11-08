@@ -18,11 +18,52 @@ public class SearchActivity extends AppCompatActivity {
     RecyclerAdapter recyclerAdapter;
 
     List<String> moviesList;
+    List<String> nameList;
+    List<String> addressList;
+    List<String> urlList;
+    List<Object> polylineList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_search);
+
+        List<ArrayList<String>> listOfLists = new ArrayList<ArrayList<String>>();
+        ArrayList<String> list1 = new ArrayList<String>();
+        list1.add("Jurong West Hawker center");
+        list1.add("Jurong West st 100");
+        list1.add("url");
+        list1.add("polyline");
+        listOfLists.add(list1);
+
+        ArrayList<String> anotherList = new ArrayList<String>();
+
+        anotherList.add("Taman Jurong Hawker");
+        anotherList.add("Yung Ho Road");
+        anotherList.add("url");
+        anotherList.add("polyline");
+        listOfLists.add(anotherList);
+
+        nameList = new ArrayList<>();
+        addressList = new ArrayList<>();
+        urlList = new ArrayList<>();
+
+        for (List<String> listitem : listOfLists) {
+            for (String item : listitem ) {
+                if (item == listitem.get(0)) {
+                    nameList.add(item);
+                }
+                else if (item == listitem.get(1)) {
+                    addressList.add(item);
+                }
+                else if (item == listitem.get(3)) {
+                    urlList.add((String) item);
+                }
+            }
+        }
+        // add in list for polyline
+
+
 
         moviesList = new ArrayList<>();
         moviesList.add("Iron Man");
@@ -50,7 +91,7 @@ public class SearchActivity extends AppCompatActivity {
         moviesList.add("Spider-Man: Far From Home");
 
         recyclerView = findViewById(R.id.recyclerView);
-        recyclerAdapter = new RecyclerAdapter(moviesList);
+        recyclerAdapter = new RecyclerAdapter(nameList);
 //        recyclerView.setLayoutManager(new LinearLayoutManager(this));
         recyclerView.setAdapter(recyclerAdapter);
 
