@@ -113,6 +113,35 @@ public class ProfileMgr implements ProfileMgrInterface {
     }
 
     /**
+     * retrieve History of current profile
+     * @param myCallback
+     * @param Uid
+     */
+    @Override
+    public void retrieveHistory(final MyCallbackString myCallback, final String Uid)
+    {
+        database = FirebaseDatabase.getInstance();
+        userRef = database.getReference("users");
+        userRef.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                String historyStr;
+                for (DataSnapshot data : dataSnapshot.child(Uid).child("profiles").getChildren()) {
+                    if (data.child("thisProfile").getValue(boolean.class)) {
+                        historyStr = data.child("history").getValue(String.class);
+                        myCallback.onCallback(historyStr);
+                    }
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+    }
+
+    /**
      * retrieve particular profile with userID and profileID
      * @param myCallback
      * @param uId
@@ -141,10 +170,10 @@ public class ProfileMgr implements ProfileMgrInterface {
     /**
      * edit current profile name with userID
      * @param uId
-     * @param name
+     * @param history
      */
     @Override
-    public void editProfile(String uId, String name) {
+    public void editHistory(String uId, String history) {
         database = FirebaseDatabase.getInstance();
         userRef = database.getReference("users");
         userRef.addListenerForSingleValueEvent(new ValueEventListener() {
@@ -152,7 +181,7 @@ public class ProfileMgr implements ProfileMgrInterface {
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 for (DataSnapshot data : dataSnapshot.child(uId).child("profiles").getChildren()) {
                     if (data.child("thisProfile").getValue(boolean.class)) {
-                        userRef.child(uId).child("profiles").child(data.getKey()).child("name").setValue(name);
+                        userRef.child(uId).child("profiles").child(data.getKey()).child("history").setValue(history);
                     }
                 }
             }
