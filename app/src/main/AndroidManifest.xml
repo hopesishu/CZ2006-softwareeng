@@ -39,8 +39,8 @@
 
 
 
-        <activity android:name=".LoginActivity"
-            android:theme="@style/AppTheme.NoActionBar">
+        <activity android:name=".SearchActivity">
+<!--            android:theme="@style/AppTheme.NoActionBar">-->
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -48,7 +48,7 @@
             </intent-filter>
         </activity>
 
-<!--        <activity android:name=".SearchActivity"></activity>-->
+        <activity android:name=".LoginActivity"></activity>
 
 
 

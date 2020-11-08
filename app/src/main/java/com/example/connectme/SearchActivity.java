@@ -91,7 +91,7 @@ public class SearchActivity extends AppCompatActivity {
         moviesList.add("Spider-Man: Far From Home");
 
         recyclerView = findViewById(R.id.recyclerView);
-        recyclerAdapter = new RecyclerAdapter(nameList);
+        recyclerAdapter = new RecyclerAdapter(nameList, addressList);
 //        recyclerView.setLayoutManager(new LinearLayoutManager(this));
         recyclerView.setAdapter(recyclerAdapter);
 
