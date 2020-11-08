@@ -54,7 +54,7 @@ public class activity_profile extends AppCompatActivity {
             public void onClick(View view) {
                 //Log.d(TAG, "onClick: Submit pressed.");
                 String history = activity_profile.this.getInput(editHistoryText);
-                history = park_history.getText() + ".\n" + history;
+                history = park_history.getText() + "\n" + history + ".";
                 profileMgr.editHistory(uId, history);
             }
         });
