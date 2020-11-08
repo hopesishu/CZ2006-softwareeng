@@ -14,6 +14,9 @@ import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
 
+import java.util.ArrayList;
+
+import control.HistoryMgr;
 import control.ProfileMgr;
 import entity.ProfileMgrInterface;
 
@@ -29,17 +32,18 @@ public class activity_profile extends AppCompatActivity {
         if (!EventBus.getDefault().isRegistered(this)) {
             EventBus.getDefault().register(this);
         }
-        //@yuchen something wrong with the logic
-        //app always crashes when this code is uncommented
 
         profileMgr = new ProfileMgr();
+        HistoryMgr historyMgr = new HistoryMgr();
         String apple = "2";
 
         TextView profile_name = (TextView) findViewById(R.id.profile_name);
         TextView dateOfBirth = (TextView) findViewById(R.id.date_of_birth);
+        TextView park_history = (TextView) findViewById(R.id.park_history);
 
         profileMgr.retrieveCurrentProfileName(value -> profile_name.setText(value), uId);
         profileMgr.retrieveCurrentDOB(value -> dateOfBirth.setText(value), uId);
+        historyMgr.getHistory(value -> park_history.setText(value), uId);
 
 
         //linking bottom navigation bar

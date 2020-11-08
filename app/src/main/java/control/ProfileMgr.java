@@ -112,7 +112,6 @@ public class ProfileMgr implements ProfileMgrInterface {
         });
     }
 
-
     /**
      * retrieve particular profile with userID and profileID
      * @param myCallback
