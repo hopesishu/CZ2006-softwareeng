@@ -25,21 +25,22 @@
             android:name=".activity_profile"
             android:label="@string/title_activity_profile"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity
-            android:name=".SearchActivity"
-            android:label="@string/title_activity_profile"
-            android:theme="@style/AppTheme.NoActionBar" />
-        <activity
-            android:name=".MainActivity"
-            android:label="@string/title_activity_profile"
-            android:theme="@style/AppTheme.NoActionBar" />
-        <activity
-            android:name=".CreateAccountActivity"
-            android:theme="@style/AppTheme.NoActionBar"/>
 
         <activity
-            android:name=".LoginActivity"
-            android:theme="@style/AppTheme.NoActionBar" >
+            android:name=".CreateAccountActivity"
+            android:theme="@style/AppTheme.NoActionBar" />
+
+        <activity
+            android:name=".MainActivity"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".MapsActivity"
+            android:theme="@style/AppTheme.NoActionBar" />
+
+
+
+        <activity android:name=".LoginActivity"
+            android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -47,8 +48,12 @@
             </intent-filter>
         </activity>
 
+<!--        <activity android:name=".SearchActivity"></activity>-->
 
 
-    </application>
+
+
+
+</application>
 
 </manifest>

@@ -1,4 +1,6 @@
 package com.example.connectme;
+
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,13 +20,18 @@ import java.util.List;
 public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ViewHolder> implements Filterable {
 
     private static final String TAG = "RecyclerAdapter";
-    List<String> itemList;
-    List<String> itemListAll;
+    List<String> nameList;
+    List<String> nameListAll;
+    List<String> nameListForAddress;
+    List<String> addressList;
 
-    public RecyclerAdapter(List<String> itemList) {
-        this.itemList = itemList;
-        itemListAll = new ArrayList<>();
-        itemListAll.addAll(itemList);
+    public RecyclerAdapter(List<String> nameList, List<String> addressList) {
+        this.nameList = nameList;
+        this.addressList = addressList;
+        nameListForAddress = new ArrayList<>();
+        nameListForAddress.addAll(nameList);
+        nameListAll = new ArrayList<>();
+        nameListAll.addAll(nameList);
     }
 
     @NonNull
@@ -38,14 +45,23 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ViewHo
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
+        int addressPos = 0;
 //        change to retrieve address from api
-        holder.rowCountTextView.setText(String.valueOf(position));
-        holder.textView.setText(itemList.get(position));
+        holder.textView.setText(nameList.get(position));
+        for (String item : nameListForAddress)
+        {
+            if (item == nameList.get(position))
+            {
+                break;
+            }
+            addressPos++;
+        }
+        holder.rowCountTextView.setText(addressList.get(addressPos));
     }
 
     @Override
     public int getItemCount() {
-        return itemList.size();
+        return nameList.size();
     }
 
     @Override
@@ -63,11 +79,11 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ViewHo
             List<String> filteredList = new ArrayList<>();
 
             if (charSequence == null || charSequence.length() == 0) {
-                filteredList.addAll(itemListAll);
+                filteredList.addAll(nameListAll);
             } else {
-                for (String movie: itemListAll) {
-                    if (movie.toLowerCase().contains(charSequence.toString().toLowerCase())) {
-                        filteredList.add(movie);
+                for (String name: nameListAll) {
+                    if (name.toLowerCase().contains(charSequence.toString().toLowerCase())) {
+                        filteredList.add(name);
                     }
                 }
             }
@@ -80,8 +96,8 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ViewHo
         //Automatic on UI thread
         @Override
         protected void publishResults(CharSequence charSequence, FilterResults filterResults) {
-            itemList.clear();
-            itemList.addAll((Collection<? extends String>) filterResults.values);
+            nameList.clear();
+            nameList.addAll((Collection<? extends String>) filterResults.values);
             notifyDataSetChanged();
         }
     };
@@ -106,7 +122,12 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ViewHo
 
         @Override
         public void onClick(View view) {
-            Toast.makeText(view.getContext(), itemList.get(getAdapterPosition()), Toast.LENGTH_SHORT).show();
+            Toast.makeText(view.getContext(), nameList.get(getAdapterPosition()), Toast.LENGTH_SHORT).show();
+            String select = nameList.get(getAdapterPosition()); // change to polyline list
+            Intent intent = new Intent(view.getContext(), LoginActivity.class);
+            intent.putExtra("Location Selected", select);
+            // String select = getIntent().getStringExtra("Location Selected"); //use in maps activity to obtain
+            view.getContext().startActivity(intent);
         }
     }
 }
