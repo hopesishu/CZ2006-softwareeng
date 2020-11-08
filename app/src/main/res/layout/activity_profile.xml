@@ -6,16 +6,38 @@
     android:layout_height="match_parent"
     tools:context=".activity_profile">
 
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/profile_toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+
+        android:background="?attr/colorPrimary"
+        android:minHeight="?attr/actionBarSize"
+        android:theme="?attr/actionBarTheme"
+
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+
+        android:paddingTop="10dp"
+        android:paddingLeft="10dp"
+
+        app:navigationIcon="@drawable/ic_arrow_back_24dp" />
+
     <TextView
         android:id="@+id/ProfileHeader"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:padding="20dp"
+
+        android:paddingTop="10dp"
+        android:paddingLeft="70dp"
         android:text="@string/profile"
         android:textSize="22sp"
         android:textStyle="bold"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:textColor="@color/colorWhite"
+        app:layout_constraintStart_toStartOf="@id/profile_toolbar"
+        app:layout_constraintTop_toTopOf="@id/profile_toolbar"
+        app:layout_constraintBottom_toBottomOf="@id/profile_toolbar"/>
 
     <TextView
         android:id="@+id/profile_name"

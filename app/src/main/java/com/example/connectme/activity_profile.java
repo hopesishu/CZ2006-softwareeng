@@ -7,6 +7,7 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
@@ -32,6 +33,9 @@ public class activity_profile extends AppCompatActivity {
         if (!EventBus.getDefault().isRegistered(this)) {
             EventBus.getDefault().register(this);
         }
+
+        Toolbar toolbar = findViewById(R.id.profile_toolbar);
+        toolbar.setNavigationIcon(R.drawable.ic_arrow_back_24dp);
 
         profileMgr = new ProfileMgr();
         HistoryMgr historyMgr = new HistoryMgr();
@@ -71,7 +75,17 @@ public class activity_profile extends AppCompatActivity {
             }
         });
 
+        toolbar.setNavigationOnClickListener(v -> {
+            onBackPressed(); // Implemented by activity
+        });
     }
+
+    @Override
+    public void onBackPressed() {
+        startActivity(new Intent(this, activity_settings.class));
+        finish();
+    }
+
     @Override
     public void onStop(){
         super.onStop();
