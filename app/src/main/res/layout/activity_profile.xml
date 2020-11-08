@@ -40,39 +40,85 @@
         app:layout_constraintBottom_toBottomOf="@id/profile_toolbar"/>
 
     <TextView
+        android:id="@+id/name_header"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="40dp"
+        android:layout_marginTop="40dp"
+        android:paddingRight="4dp"
+
+        android:text="Name: "
+        android:textSize="20sp"
+        android:textColor="@color/colorBlack"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/profile_toolbar"
+        app:layout_constraintEnd_toStartOf="@id/profile_name"/>
+
+    <TextView
         android:id="@+id/profile_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="124dp"
-        android:layout_marginTop="180dp"
-        android:text="default name"
+        android:layout_marginTop="40dp"
+
+        android:text="Default Name"
+
+        android:textColor="@color/colorBlack"
+        android:textSize="20dp"
+        app:layout_constraintStart_toEndOf="@id/name_header"
+        app:layout_constraintTop_toBottomOf="@id/profile_toolbar" />
+
+
+    <TextView
+        android:id="@+id/DOB_header"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:paddingRight="4dp"
+
+        android:text="Date Of Birth: "
         android:textSize="20sp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:textColor="@color/colorBlack"
+        app:layout_constraintStart_toStartOf="@id/name_header"
+        app:layout_constraintTop_toBottomOf="@id/name_header" />
+
 
     <TextView
         android:id="@+id/date_of_birth"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="default date"
+        android:layout_marginTop="10dp"
+
+        android:text="Default Date"
         android:textSize="20sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.447" />
+        android:textColor="@color/colorBlack"
+        app:layout_constraintStart_toEndOf="@id/DOB_header"
+        app:layout_constraintTop_toBottomOf="@id/name_header" />
 
     <TextView
-        android:id="@+id/name_header"
+        android:id="@+id/PCN_header"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="40dp"
-        android:layout_marginTop="175dp"
-        android:text="Name: "
+        android:layout_marginTop="10dp"
+        android:paddingRight="4dp"
+
+        android:text="Recently visited Park Connectors:"
         android:textSize="20sp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:textColor="@color/colorBlack"
+        app:layout_constraintStart_toStartOf="@id/DOB_header"
+        app:layout_constraintTop_toBottomOf="@id/DOB_header" />
+
+    <TextView
+        android:id="@+id/park_history"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+
+        android:text="Default History"
+        android:textSize="20sp"
+        android:textColor="@color/colorBlack"
+        app:layout_constraintStart_toEndOf="@id/PCN_header"
+        app:layout_constraintTop_toBottomOf="@id/DOB_header" />
+
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/bottomNavigationView"
@@ -82,34 +128,8 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:menu="@menu/menu_bottom_navigation" />
 
-    <TextView
-        android:id="@+id/DOB_header"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="40dp"
-        android:layout_marginTop="323dp"
-        android:text="Date Of Birth: "
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
 
-    <TextView
-        android:id="@+id/PCN_header"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="57dp"
-        android:layout_marginTop="403dp"
-        android:text="Recently visited Park Connectors:"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
 
-    <TextView
-        android:id="@+id/park_history"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="291dp"
-        android:layout_marginTop="405dp"
-        android:text="default history"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
