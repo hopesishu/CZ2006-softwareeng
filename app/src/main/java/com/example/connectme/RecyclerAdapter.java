@@ -1,5 +1,6 @@
 package com.example.connectme;
 
+import android.content.Context;
 import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -13,6 +14,8 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
+
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
@@ -22,16 +25,20 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ViewHo
     private static final String TAG = "RecyclerAdapter";
     List<String> nameList;
     List<String> nameListAll;
-    List<String> nameListForAddress;
+    List<String> nameListConstant;
     List<String> addressList;
+    List<String> urlList;
+    Context context;
 
-    public RecyclerAdapter(List<String> nameList, List<String> addressList) {
+    public RecyclerAdapter(List<String> nameList, List<String> addressList, List<String> urlList) {
         this.nameList = nameList;
         this.addressList = addressList;
-        nameListForAddress = new ArrayList<>();
-        nameListForAddress.addAll(nameList);
+        this.urlList = urlList;
+        nameListConstant = new ArrayList<>();
+        nameListConstant.addAll(nameList);
         nameListAll = new ArrayList<>();
         nameListAll.addAll(nameList);
+
     }
 
     @NonNull
@@ -45,18 +52,21 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ViewHo
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        int addressPos = 0;
+        int itemPos = 0;
+        Context context = holder.itemView.getContext();
 //        change to retrieve address from api
         holder.textView.setText(nameList.get(position));
-        for (String item : nameListForAddress)
+        for (String item : nameListConstant)
         {
             if (item == nameList.get(position))
             {
                 break;
             }
-            addressPos++;
+            itemPos++;
         }
-        holder.rowCountTextView.setText(addressList.get(addressPos));
+        holder.rowCountTextView.setText(addressList.get(itemPos));
+        Glide.with(context).load(urlList.get(itemPos)).into(holder.imageView);
+
     }
 
     @Override

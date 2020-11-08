@@ -32,7 +32,7 @@ public class SearchActivity extends AppCompatActivity {
         ArrayList<String> list1 = new ArrayList<String>();
         list1.add("Jurong West Hawker center");
         list1.add("Jurong West st 100");
-        list1.add("url");
+        list1.add("https://www.nea.gov.sg/images/default-source/Hawker-Centres-Division/resize_1262155861677.jpg");
         list1.add("polyline");
         listOfLists.add(list1);
 
@@ -40,7 +40,7 @@ public class SearchActivity extends AppCompatActivity {
 
         anotherList.add("Taman Jurong Hawker");
         anotherList.add("Yung Ho Road");
-        anotherList.add("url");
+        anotherList.add("http://www.nea.gov.sg/images/default-source/Hawker-Centres-Division/resize_1267879560483.jpg");
         anotherList.add("polyline");
         listOfLists.add(anotherList);
 
@@ -48,7 +48,7 @@ public class SearchActivity extends AppCompatActivity {
 
         anotherList2.add("Ellias Mall Hawker");
         anotherList2.add("Pasir Ris");
-        anotherList2.add("url");
+        anotherList2.add("http://www.nea.gov.sg/images/default-source/Hawker-Centres-Division/resize_1262154766447.jpg");
         anotherList2.add("polyline");
         listOfLists.add(anotherList2);
 
@@ -56,7 +56,7 @@ public class SearchActivity extends AppCompatActivity {
 
         anotherList3.add("Tampines Hawker");
         anotherList3.add("Tampines");
-        anotherList3.add("url");
+        anotherList3.add("http://www.nea.gov.sg/images/default-source/Hawker-Centres-Division/resize_1267846802175.jpg");
         anotherList3.add("polyline");
         listOfLists.add(anotherList3);
 
@@ -72,7 +72,7 @@ public class SearchActivity extends AppCompatActivity {
                 else if (item == listitem.get(1)) {
                     addressList.add(item);
                 }
-                else if (item == listitem.get(3)) {
+                else if (item == listitem.get(2)) {
                     urlList.add((String) item);
                 }
             }
@@ -107,7 +107,7 @@ public class SearchActivity extends AppCompatActivity {
         moviesList.add("Spider-Man: Far From Home");
 
         recyclerView = findViewById(R.id.recyclerView);
-        recyclerAdapter = new RecyclerAdapter(nameList, addressList);
+        recyclerAdapter = new RecyclerAdapter(nameList, addressList, urlList);
 //        recyclerView.setLayoutManager(new LinearLayoutManager(this));
         recyclerView.setAdapter(recyclerAdapter);
 
