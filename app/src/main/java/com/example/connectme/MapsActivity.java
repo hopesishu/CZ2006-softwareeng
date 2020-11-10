@@ -68,6 +68,8 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.nio.charset.Charset;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 
 import control.ProfileMgr;
 import entity.LocationData;
@@ -79,7 +81,7 @@ import org.greenrobot.eventbus.ThreadMode;
 
  */
 
-public class MapsActivity extends FragmentActivity implements OnMapReadyCallback, TaskLoadedCallback {
+public class MapsActivity extends FragmentActivity implements OnMapReadyCallback, TaskLoadedCallback{
 
     private GoogleMap mMap;
 
@@ -93,6 +95,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     private ArrayList<Marker> arrayList_hawker = new ArrayList<Marker>();
     private ArrayList<Polyline> arrayList_pcn = new ArrayList<Polyline>();
     private boolean isPcnShown = false;
+    private boolean isHawkerShown = false;
     private ArrayList<Polyline> arrayList_navigation = new ArrayList<Polyline>();
 
     public static LocationData database_pcn = new LocationData();
@@ -117,16 +120,12 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     private Marker intent_temp_marker;
     private Polyline intent_temp_polyline;
 
-    private boolean hasIntent;
-
-    private DatabaseReference myRef;
-    //private FirebaseAuth mAuth = FirebaseAuth.getInstance();
-    //private FirebaseDatabase mFirebaseDatabase = FirebaseDatabase.getInstance();
-    private String userID;
-
+    //Profile Management
     private ProfileMgr mProfileMgr = new ProfileMgr();
-
     private String uId;
+
+    //Intent Management
+    private boolean hasIntent;
     private String intent_name;
     private boolean intent_isHawker;
 
@@ -151,28 +150,11 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         fragmentTransaction.add(R.id.map, mMapFragment);
         fragmentTransaction.commit();
         mMapFragment.getMapAsync(this);
+
+
         button_navigate = (Button)findViewById(R.id.button_navigate);
         button_navigate.setVisibility(View.INVISIBLE);
         button_navigate.setEnabled(false);
-
-        /*
-        button_location = findViewById(R.id.button_location);
-        button_location.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v)
-            {
-                if (permission_acquired == false) {
-                    checkPermission(
-                            Manifest.permission.ACCESS_FINE_LOCATION,
-                            ACCESS_FINE_LOCATION_CODE);
-                }
-                if (permission_acquired == true){
-                    moveCameraToUser();
-                }
-
-            }
-        });
-        */
 
         chip_pcn = findViewById(R.id.chip_pcn);
         chip_pcn.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
@@ -186,29 +168,6 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                 }
             }
         });
-
-        /*
-        chip_carpark = findViewById(R.id.chip_carpark);
-        chip_carpark.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                if(isChecked){
-                    try {
-                        showCarpark();
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                    } catch (XmlPullParserException e) {
-                        e.printStackTrace();
-                    }
-                }
-                else{
-                    hideCarpark();
-                }
-            }
-        });
-
-         */
-
 
         chip_hawker = findViewById(R.id.chip_hawker);
         chip_hawker.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
@@ -225,65 +184,46 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         fusedLocationClient = LocationServices.getFusedLocationProviderClient(this);
     }
 
-    /**
-     * Manipulates the map once available.
-     * This callback is triggered when the map is ready to be used.
-     * This is where we can add markers or lines, add listeners or move the camera. In this case,
-     * we just add a marker near Sydney, Australia.
-     * If Google Play services is not installed on the device, the user will be prompted to install
-     * it inside the SupportMapFragment. This method will only be triggered once the user has
-     * installed Google Play services and returned to the app.
-     */
     @Override
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
-
-        // Add a marker in Sydney and move the camera
         LatLng singapore = new LatLng(1.2903, 103.85);
-        //mMap.addMarker(new MarkerOptions().position(singapore).title("Singapore"));
         mMap.moveCamera(CameraUpdateFactory.newLatLng(singapore));
         mMap.moveCamera(CameraUpdateFactory.zoomTo(10));
+
+        //Somehow mysteriously this method doesn't work HERE
+
         mMap.setOnMarkerClickListener(new GoogleMap.OnMarkerClickListener() {
             @Override
             public boolean onMarkerClick(Marker marker) {
-                //Log.i("click", "marker");
+                Log.i("clicked", "Marker");
                 hideNavigation();
                 button_navigate.setVisibility(View.VISIBLE);
                 button_navigate.setEnabled(true);
                 navigation_target = marker.getTitle();
                 navigation_LatLng = marker.getPosition();
-                removeTemp();
-                return false;
-            }
-        });
-        /*
-        mMap.setOnPolylineClickListener(new GoogleMap.OnPolylineClickListener() {
-            @Override
-            public void onPolylineClick(Polyline polyline) {
-                Log.i("click", "poly");
-                button_navigate.setVisibility(View.VISIBLE);
-                button_navigate.setEnabled(true);
-                navigation_target = ((ArrayList<String>)polyline.getTag()).get(0) + " " + ((ArrayList<String>)polyline.getTag()).get(1);
-                Log.i("polyline click", ((ArrayList<String>)polyline.getTag()).get(0) + " " + ((ArrayList<String>)polyline.getTag()).get(1));
+                //removeTemp();
+                return true;
             }
         });
 
-         */
+
+
 
         mMap.setOnMapClickListener(new GoogleMap.OnMapClickListener() {
             @Override
             public void onMapClick(LatLng latLng) {
+                Log.i("clicked", "Map");
                 removeTemp();
                 boolean isOnPolyline = false;
+                boolean isOnMarker = false;
                 if(isPcnShown) {
                     for (Polyline polyline : arrayList_pcn) {
                         if (PolyUtil.isLocationOnPath(latLng, polyline.getPoints(), true, 40)) {
                             hideNavigation();
-                            Log.i("click", "poly");
                             button_navigate.setVisibility(View.VISIBLE);
                             button_navigate.setEnabled(true);
                             navigation_target = ((ArrayList<String>) polyline.getTag()).get(0) + ", " + ((ArrayList<String>) polyline.getTag()).get(1);
-                            Log.i("polyline click", ((ArrayList<String>) polyline.getTag()).get(0) + ", " + ((ArrayList<String>) polyline.getTag()).get(1));
                             double min_distance = 5; //Big enough number;
 
 
@@ -297,9 +237,8 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                                     navigation_LatLng = poly_latlng;
                                 }
                             }
-                            //BitmapDescriptor transparent = BitmapDescriptorFactory.fromResource(R.drawable.transparent);
-                            BitmapDescriptor transparent = BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_YELLOW);
-                            polyline_temp_marker = mMap.addMarker(new MarkerOptions().position(latLng).title(navigation_target).icon(transparent));
+
+                            polyline_temp_marker = mMap.addMarker(new MarkerOptions().position(latLng).title(navigation_target).icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_YELLOW)));
                             polyline_temp_marker.showInfoWindow();
                             mMap.animateCamera(CameraUpdateFactory.newLatLng(latLng));
                             isOnPolyline = true;
@@ -307,8 +246,22 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                         }
                     }
                 }
-                if (!isOnPolyline) {
-                    Log.i("click", "map");
+                if(isHawkerShown){
+                    for(Marker marker : arrayList_hawker){
+                        if (PolyUtil.isLocationOnPath(latLng, new ArrayList<LatLng>(Collections.singleton(marker.getPosition())), true, 40)){
+                            hideNavigation();
+                            button_navigate.setVisibility(View.VISIBLE);
+                            button_navigate.setEnabled(true);
+                            navigation_target = marker.getTitle();
+                            navigation_LatLng = marker.getPosition();
+                            marker.showInfoWindow();
+                            mMap.animateCamera(CameraUpdateFactory.newLatLng(latLng));
+                            isOnMarker = true;
+                            break;
+                        }
+                    }
+                }
+                if (!isOnPolyline && !isOnMarker) {
                     button_navigate.setVisibility(View.INVISIBLE);
                     button_navigate.setEnabled(false);
                     hideNavigation();
@@ -331,6 +284,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         } catch (XmlPullParserException e) {
             e.printStackTrace();
         }
+
 
         if (hasIntent){
             if(intent_isHawker){
@@ -358,6 +312,8 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             }
         }
     }
+
+
     public void removeTemp(){
         if (polyline_temp_marker != null) {
             polyline_temp_marker.remove();
@@ -382,13 +338,11 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     }
 
     public void onNavigationClick(View view){
-        //myRef = mFirebaseDatabase.getReference();
-        //myRef.child("users").child("1TYWJLwtCWglNM5wm2pRFtPcneU2"/*mAuth.getCurrentUser().getUid()*/).child("profiles").setValue(new_visited);
         Log.i("navigate", navigation_target);
         String url = getUrl(current_LatLng, navigation_LatLng, "driving");
+        Log.i("url", url);
         new FetchURL(MapsActivity.this).execute(url, "driving");
-        mProfileMgr.editHistory(navigation_target, uId);
-
+        //mProfileMgr.editHistory(navigation_target, uId);
     }
 
     private String getUrl(LatLng origin, LatLng dest, String directionMode) {
@@ -408,6 +362,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     }
 
     public void onTaskDone(Object... values){
+        Log.i("OnTaskDone", navigation_target);
         if(current_polyline != null) current_polyline.remove();
         current_polyline = mMap.addPolyline((PolylineOptions)values[0]);
         arrayList_navigation.add(current_polyline);
@@ -544,64 +499,19 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         }
     }
 
-
-
-
-    /*
-    public void showCarpark() throws IOException, XmlPullParserException {
-        //Log.i("qwe", "success");
-
-        //CSVReader reader = new CSVReader(new FileReader("C:\\Users\\11219\\AndroidStudioProjects\\Gmap\\app\\src\\main\\res\\raw\\hdb_carpark.csv"));
-        //Log.i("qwe", "success");
-        InputStream is = getResources().openRawResource(R.raw.hdb_carpark);
-        BufferedReader reader = new BufferedReader(new InputStreamReader(is, Charset.forName("UTF-8")));
-        String nextLine = "";
-        nextLine = reader.readLine();
-        try {
-            while ((nextLine = reader.readLine()) != null) {
-                //Log.i("qwe", nextLine[0]);
-                String[] tokens = nextLine.split(",");
-                Double svy_x = Double.parseDouble(tokens[2].substring(1,tokens[2].length()-1));
-                Double svy_y = Double.parseDouble(tokens[3].substring(1,tokens[3].length()-1));
-                SVY21Coordinate svy = new SVY21Coordinate(svy_y, svy_x);
-                LatLonCoordinate latlon = SVY21.computeLatLon(svy);
-                LatLng latLng= new LatLng(latlon.getLatitude(), latlon.getLongitude());
-                String name = tokens[0].substring(1,tokens[0].length()-1) + ", " + tokens[1].substring(1,tokens[1].length()-1);
-                Marker marker = mMap.addMarker(new MarkerOptions().position(latLng).title(name).icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_YELLOW)));
-                arrayList_carpark.add(marker);
-            }
-        } catch (IOException e) {
-
-
-        }
-    }
-
-
-    public void hideCarpark(){
-        for(Marker marker : arrayList_carpark){
-            marker.remove();
-        }
-        arrayList_carpark = new ArrayList<Marker>();
-    }
-
-     */
-
-
-
-
     public void showHawker(){
         for(Marker marker : arrayList_hawker) {
             marker.setVisible(true);
-            //marker.setClickable(true);
         }
+        isHawkerShown = true;
     }
 
 
     public void hideHawker(){
         for(Marker marker : arrayList_hawker) {
             marker.setVisible(false);
-            //marker.setClickable(false);
         }
+        isHawkerShown = false;
     }
 
     public void createHawkerMarkers() throws IOException, XmlPullParserException {
@@ -610,6 +520,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         createHawker(layer_hawker.getContainers());
         layer_hawker.removeLayerFromMap();
     }
+
     public void createHawker(Iterable<KmlContainer> containers) {
         for (KmlContainer container : containers) {
             if (container.hasContainers()) {
@@ -622,12 +533,8 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                     String description = placemark.getProperty("description");
 
                     int start = description.indexOf("<th>NAME</th>") + "<th>NAME</th>".length() + 2;
-                    //Log.i("des", description);
-                    //Log.i("Start", Integer.toString(start));
                     int end = description.indexOf("</td>", start);
-                    //Log.i("End", Integer.toString(end));
                     start += "<td>".length();
-                    //Log.i("Start2", Integer.toString(start));
                     String hawkerName = description.substring(start, end);
 
 
@@ -646,11 +553,9 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                     Marker marker = mMap.addMarker(new MarkerOptions().position(latLng).title(hawkerName).icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_RED)));
                     arrayList_hawker.add(marker);
                     marker.setVisible(false);
-                    //marker.setClickable(false);
 
                     ArrayList<String> item = new ArrayList<>();
                     item.add(hawkerName);
-                    Log.i("hawkername", hawkerName);
                     item.add(streetName);
                     item.add(url);
                     database_hawker.add(item);
@@ -658,11 +563,4 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             }
         }
     }
-
-    /*
-    public ArrayList<ArrayList<String>> getMapHawker(){
-        return database_hawker;
-    }
-
-     */
 }
