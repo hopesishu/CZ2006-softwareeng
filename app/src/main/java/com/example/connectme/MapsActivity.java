@@ -117,6 +117,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     protected void onCreate(Bundle savedInstanceState) {
         intent_isHawker = getIntent().getBooleanExtra("isHawker", true);
         intent_name = getIntent().getStringExtra("name");
+        //Log.i("intentname", "intent name" + intent_isHawker);
         hasIntent = (intent_name != null);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_maps);
@@ -555,7 +556,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                     end = description.indexOf("</td>", start);
                     start += "<td>".length();
                     String url = description.substring(start, end);
-                    Log.i("URL", url);
+
 
 
                     Marker marker = mMap.addMarker(new MarkerOptions().position(latLng).title(hawkerName).icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_RED)));
