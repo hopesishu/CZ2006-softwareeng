@@ -1,5 +1,14 @@
 package com.example.connectme;
 
+import androidx.annotation.NonNull;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
+import androidx.fragment.app.FragmentActivity;
+import androidx.fragment.app.FragmentTransaction;
+
+import com.google.android.gms.maps.CameraUpdate;
+import com.google.android.gms.maps.model.BitmapDescriptor;
+import com.google.firebase.*;
 import android.Manifest;
 import android.annotation.SuppressLint;
 import android.content.pm.PackageManager;
@@ -9,12 +18,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CompoundButton;
-
-import androidx.annotation.Nullable;
-import androidx.core.app.ActivityCompat;
-import androidx.core.content.ContextCompat;
-import androidx.fragment.app.FragmentActivity;
-import androidx.fragment.app.FragmentTransaction;
+import android.widget.Toast;
 
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationServices;
@@ -22,7 +26,6 @@ import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
-import com.google.android.gms.maps.model.BitmapDescriptor;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
@@ -31,41 +34,68 @@ import com.google.android.gms.maps.model.Polyline;
 import com.google.android.gms.maps.model.PolylineOptions;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.chip.Chip;
+import com.google.android.material.chip.ChipGroup;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 import com.google.maps.android.PolyUtil;
+import com.google.maps.android.data.Feature;
 import com.google.maps.android.data.kml.KmlContainer;
 import com.google.maps.android.data.kml.KmlLayer;
 import com.google.maps.android.data.kml.KmlLineString;
 import com.google.maps.android.data.kml.KmlPlacemark;
 import com.google.maps.android.data.kml.KmlPoint;
+
+import com.opencsv.CSVReader;
 import com.thecodecity.mapsdirection.directionhelpers.FetchURL;
 import com.thecodecity.mapsdirection.directionhelpers.TaskLoadedCallback;
 
+import java.io.IOException;
+import java.io.FileReader;
+
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
 import org.xmlpull.v1.XmlPullParserException;
 
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileReader;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.nio.charset.Charset;
 import java.util.ArrayList;
 
+import control.ProfileMgr;
+
+/*
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
+
+ */
 
 public class MapsActivity extends FragmentActivity implements OnMapReadyCallback, TaskLoadedCallback {
 
-    //add in on create call haoran's function for list
     private GoogleMap mMap;
 
     private FloatingActionButton button_location;
     private Chip chip_pcn;
-    //    private Chip chip_carpark;
     private Chip chip_hawker;
 
     private KmlLayer layer_pcn;
-    //    private KmlLayer layer_carpark;
     private KmlLayer layer_hawker;
 
     private ArrayList<Marker> arrayList_hawker = new ArrayList<Marker>();
-    //    private ArrayList<Marker> arrayList_carpark = new ArrayList<Marker>();
     private ArrayList<Polyline> arrayList_pcn = new ArrayList<Polyline>();
+    private boolean isPcnShown = false;
     private ArrayList<Polyline> arrayList_navigation = new ArrayList<Polyline>();
+
+    private ArrayList<ArrayList<String>> database_pcn = new ArrayList<ArrayList<String>>();
+    private ArrayList<ArrayList<String>> database_hawker =  new ArrayList<ArrayList<String>>();
 
     private Button button_navigate;
 
@@ -83,23 +113,36 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     private Polyline current_polyline; //Ignore this variable
 
     private Marker polyline_temp_marker;
+    private Marker intent_temp_marker;
+    private Polyline intent_temp_polyline;
+
+    private boolean hasIntent;
 
     private DatabaseReference myRef;
     //private FirebaseAuth mAuth = FirebaseAuth.getInstance();
     //private FirebaseDatabase mFirebaseDatabase = FirebaseDatabase.getInstance();
     private String userID;
 
-    //private HistoryMgr mHistoryMgr = new HistoryMgr();
+    private ProfileMgr mProfileMgr = new ProfileMgr();
 
     private String uId;
-
-
-
+    private String intent_name;
+    private boolean intent_isHawker;
 
     @Override
-    protected void onCreate(@Nullable Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState) {
+        intent_isHawker = getIntent().getBooleanExtra("isHawker", true);
+        intent_name = getIntent().getStringExtra("name");
+        hasIntent = (intent_name != null);
         super.onCreate(savedInstanceState);
-        setContentView(com.example.connectme.R.layout.activity_maps);
+        setContentView(R.layout.activity_maps);
+
+        EventBus.getDefault().register(this);
+        if (!EventBus.getDefault().isRegistered(this)) {
+            EventBus.getDefault().register(this);
+        }
+
+
         // Obtain the SupportMapFragment and get notified when the map is ready to be used.
         SupportMapFragment mMapFragment = SupportMapFragment.newInstance();
         FragmentTransaction fragmentTransaction =
@@ -107,7 +150,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         fragmentTransaction.add(R.id.map, mMapFragment);
         fragmentTransaction.commit();
         mMapFragment.getMapAsync(this);
-        button_navigate = (Button) findViewById(com.example.connectme.R.id.button_navigate);
+        button_navigate = (Button)findViewById(R.id.button_navigate);
         button_navigate.setVisibility(View.INVISIBLE);
         button_navigate.setEnabled(false);
 
@@ -130,58 +173,50 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         });
         */
 
-        chip_pcn = findViewById(com.example.connectme.R.id.chip_pcn);
+        chip_pcn = findViewById(R.id.chip_pcn);
         chip_pcn.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                if (isChecked) {
-                    try {
-                        showPCN();
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                    } catch (XmlPullParserException e) {
-                        e.printStackTrace();
-                    }
-                } else {
+                if(isChecked){
+                    showPCN();
+                }
+                else{
                     hidePCN();
                 }
             }
         });
 
-
-//        chip_carpark = findViewById(com.example.connectme.R.id.chip_carpark);
-//        chip_carpark.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-//            @Override
-//            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-//                if(isChecked){
-//                    try {
-//                        showCarpark();
-//                    } catch (IOException e) {
-//                        e.printStackTrace();
-//                    } catch (XmlPullParserException e) {
-//                        e.printStackTrace();
-//                    }
-//                }
-//                else{
-//                    hideCarpark();
-//                }
-//            }
-//        });
-
-
-        chip_hawker = findViewById(com.example.connectme.R.id.chip_hawker);
-        chip_hawker.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+        /*
+        chip_carpark = findViewById(R.id.chip_carpark);
+        chip_carpark.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                if (isChecked) {
+                if(isChecked){
                     try {
-                        showHawker();
+                        showCarpark();
                     } catch (IOException e) {
                         e.printStackTrace();
                     } catch (XmlPullParserException e) {
                         e.printStackTrace();
                     }
-                } else {
+                }
+                else{
+                    hideCarpark();
+                }
+            }
+        });
+
+         */
+
+
+        chip_hawker = findViewById(R.id.chip_hawker);
+        chip_hawker.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if(isChecked){
+                    showHawker();
+                }
+                else{
                     hideHawker();
                 }
             }
@@ -216,9 +251,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                 button_navigate.setEnabled(true);
                 navigation_target = marker.getTitle();
                 navigation_LatLng = marker.getPosition();
-                if (polyline_temp_marker != null) {
-                    polyline_temp_marker.remove();
-                }
+                removeTemp();
                 return false;
             }
         });
@@ -239,37 +272,38 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         mMap.setOnMapClickListener(new GoogleMap.OnMapClickListener() {
             @Override
             public void onMapClick(LatLng latLng) {
-                if (polyline_temp_marker != null) {
-                    polyline_temp_marker.remove();
-                }
+                removeTemp();
                 boolean isOnPolyline = false;
-                for (Polyline polyline : arrayList_pcn) {
-                    if (PolyUtil.isLocationOnPath(latLng, polyline.getPoints(), true, 40)) {
-                        hideNavigation();
-                        Log.i("click", "poly");
-                        button_navigate.setVisibility(View.VISIBLE);
-                        button_navigate.setEnabled(true);
-                        navigation_target = ((ArrayList<String>) polyline.getTag()).get(0) + ", " + ((ArrayList<String>) polyline.getTag()).get(1);
-                        Log.i("polyline click", ((ArrayList<String>) polyline.getTag()).get(0) + ", " + ((ArrayList<String>) polyline.getTag()).get(1));
-                        double min_distance = 5; //Big enough number;
+                if(isPcnShown) {
+                    for (Polyline polyline : arrayList_pcn) {
+                        if (PolyUtil.isLocationOnPath(latLng, polyline.getPoints(), true, 40)) {
+                            hideNavigation();
+                            Log.i("click", "poly");
+                            button_navigate.setVisibility(View.VISIBLE);
+                            button_navigate.setEnabled(true);
+                            navigation_target = ((ArrayList<String>) polyline.getTag()).get(0) + ", " + ((ArrayList<String>) polyline.getTag()).get(1);
+                            Log.i("polyline click", ((ArrayList<String>) polyline.getTag()).get(0) + ", " + ((ArrayList<String>) polyline.getTag()).get(1));
+                            double min_distance = 5; //Big enough number;
 
 
-                        for (LatLng poly_latlng : polyline.getPoints()) {
-                            double lat_diff, lng_diff;
-                            lat_diff = current_LatLng.latitude - poly_latlng.latitude;
-                            lng_diff = current_LatLng.longitude - poly_latlng.longitude;
-                            double distance = lat_diff * lat_diff + lng_diff * lng_diff;
-                            if (distance < min_distance) {
-                                min_distance = distance;
-                                navigation_LatLng = poly_latlng;
+                            for (LatLng poly_latlng : polyline.getPoints()) {
+                                double lat_diff, lng_diff;
+                                lat_diff = current_LatLng.latitude - poly_latlng.latitude;
+                                lng_diff = current_LatLng.longitude - poly_latlng.longitude;
+                                double distance = lat_diff * lat_diff + lng_diff * lng_diff;
+                                if (distance < min_distance) {
+                                    min_distance = distance;
+                                    navigation_LatLng = poly_latlng;
+                                }
                             }
+                            //BitmapDescriptor transparent = BitmapDescriptorFactory.fromResource(R.drawable.transparent);
+                            BitmapDescriptor transparent = BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_YELLOW);
+                            polyline_temp_marker = mMap.addMarker(new MarkerOptions().position(latLng).title(navigation_target).icon(transparent));
+                            polyline_temp_marker.showInfoWindow();
+                            mMap.animateCamera(CameraUpdateFactory.newLatLng(latLng));
+                            isOnPolyline = true;
+                            break;
                         }
-                        //BitmapDescriptor transparent = BitmapDescriptorFactory.fromResource(R.drawable.transparent);
-                        BitmapDescriptor transparent = BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_YELLOW);
-                        polyline_temp_marker = mMap.addMarker(new MarkerOptions().position(latLng).title(navigation_target).icon(transparent));
-                        polyline_temp_marker.showInfoWindow();
-                        isOnPolyline = true;
-                        break;
                     }
                 }
                 if (!isOnPolyline) {
@@ -280,26 +314,79 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                 }
             }
         });
+
+        try {
+            createPcnPolylines();
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (XmlPullParserException e) {
+            e.printStackTrace();
+        }
+
+        try {
+            createHawkerMarkers();
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (XmlPullParserException e) {
+            e.printStackTrace();
+        }
+
+        if (hasIntent){
+            if(intent_isHawker){
+                for(Marker marker: arrayList_hawker){
+                    if (marker.getTitle() == intent_name){
+                        intent_temp_marker = mMap.addMarker(new MarkerOptions().position(marker.getPosition()).title(intent_name).icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_RED)));
+
+                        intent_temp_marker.showInfoWindow();
+                        navigation_target = intent_name;
+                        navigation_LatLng = marker.getPosition();
+                        button_navigate.setVisibility(View.VISIBLE);
+                        button_navigate.setEnabled(true);
+                        mMap.animateCamera(CameraUpdateFactory.newLatLng(navigation_LatLng));
+                        break;
+                    }
+                }
+            }
+            else{
+                for (Polyline polyline: arrayList_pcn){
+                    if (intent_name.indexOf((String)polyline.getTag()) == 0){
+                        intent_temp_polyline = mMap.addPolyline(new PolylineOptions().addAll(polyline.getPoints()).width(10).clickable(false));
+                        break;
+                    }
+                }
+            }
+        }
+    }
+    public void removeTemp(){
+        if (polyline_temp_marker != null) {
+            polyline_temp_marker.remove();
+        }
+        if (intent_temp_marker != null) {
+            intent_temp_marker.remove();
+        }
+        if (intent_temp_polyline != null) {
+            intent_temp_polyline.remove();
+        }
     }
 
-    public void onGetMyLocationClick(View view) {
+    public void onGetMyLocationClick(View view){
         if (permission_acquired == false) {
             checkPermission(
                     Manifest.permission.ACCESS_FINE_LOCATION,
                     ACCESS_FINE_LOCATION_CODE);
         }
-        if (permission_acquired == true) {
+        if (permission_acquired == true){
             moveCameraToUser();
         }
     }
 
-    public void onNavigationClick(View view) {
+    public void onNavigationClick(View view){
         //myRef = mFirebaseDatabase.getReference();
-        //myRef.child("users").child("1TYWJLwtCWglNM5wm2pRFtPcneU2"/mAuth.getCurrentUser().getUid()/).child("profiles").setValue(new_visited);
+        //myRef.child("users").child("1TYWJLwtCWglNM5wm2pRFtPcneU2"/*mAuth.getCurrentUser().getUid()*/).child("profiles").setValue(new_visited);
         Log.i("navigate", navigation_target);
         String url = getUrl(current_LatLng, navigation_LatLng, "driving");
         new FetchURL(MapsActivity.this).execute(url, "driving");
-        //mHistoryMgr.addHistory(navigation_target, uId);
+        mProfileMgr.editHistory(navigation_target, uId);
 
     }
 
@@ -315,25 +402,25 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         // Output format
         String output = "json";
         // Building the url to the web service
-        String url = "https://maps.googleapis.com/maps/api/directions/" + output + "?" + parameters + "&key=" + getString(com.example.connectme.R.string.google_maps_key);
+        String url = "https://maps.googleapis.com/maps/api/directions/" + output + "?" + parameters + "&key=" + getString(R.string.google_maps_key);
         return url;
     }
 
-    public void onTaskDone(Object... values) {
-        if (current_polyline != null) current_polyline.remove();
-        current_polyline = mMap.addPolyline((PolylineOptions) values[0]);
+    public void onTaskDone(Object... values){
+        if(current_polyline != null) current_polyline.remove();
+        current_polyline = mMap.addPolyline((PolylineOptions)values[0]);
         arrayList_navigation.add(current_polyline);
 
     }
 
-    public void hideNavigation() {
-        for (Polyline polyline : arrayList_navigation) {
+    public void hideNavigation(){
+        for(Polyline polyline: arrayList_navigation){
             polyline.remove();
         }
         arrayList_navigation = new ArrayList<Polyline>();
     }
 
-    /*
+
     @Override
     public void onStop(){
         super.onStop();
@@ -345,20 +432,20 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         //Log.d("HOMEFRAG EB RECEIVER", "Username :\"" + event.getCustomMessage() + "\" Successfully Received!");
         uId = event.getCustomMessage();
         //DisplayName.setText(usernameImported);
-
     }
 
-     */
 
 
-    public void checkPermission(String permission, int requestCode) {
+    public void checkPermission(String permission, int requestCode)
+    {
         //Acquire permission
         if (ContextCompat.checkSelfPermission(this, permission)
                 == PackageManager.PERMISSION_DENIED) {
             ActivityCompat.requestPermissions(this,
-                    new String[]{permission},
+                    new String[] { permission },
                     requestCode);
-        } else {
+        }
+        else {
             permission_acquired = true;
             /*
             Toast.makeText(this,
@@ -371,14 +458,14 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
     @SuppressLint("MissingPermission")
 
-    public void moveCameraToUser() {
+    public void moveCameraToUser(){
         fusedLocationClient.getLastLocation()
                 .addOnSuccessListener(this, new OnSuccessListener<Location>() {
                     @Override
                     public void onSuccess(Location location) {
                         if (location != null) {
                             current_location = location;
-                            current_LatLng = new LatLng(current_location.getLatitude(), current_location.getLongitude());
+                            current_LatLng =  new LatLng(current_location.getLatitude(), current_location.getLongitude());
                             mMap.addMarker(new MarkerOptions().position(current_LatLng).title("You Are Here!").icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_CYAN)));
                             mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(current_LatLng, 12));
                         }
@@ -386,46 +473,54 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                 });
     }
 
-    public void showPCN() throws IOException, XmlPullParserException {
+    public void showPCN(){
+        for(Polyline polyline: arrayList_pcn) {
+            polyline.setVisible(true);
+        }
+        isPcnShown = true;
+    }
 
-        layer_pcn = new KmlLayer(mMap, com.example.connectme.R.raw.park_connector_loop_kml, this);
+
+    public void hidePCN(){
+        for(Polyline polyline: arrayList_pcn){
+            polyline.setVisible(false);
+        }
+        isPcnShown = false;
+    }
+
+
+    public void createPcnPolylines()  throws IOException, XmlPullParserException {
+        layer_pcn = new KmlLayer(mMap, R.raw.park_connector_loop_kml, this);
         layer_pcn.addLayerToMap();
         //.i("Has containers?", String.valueOf(layer_pcn.hasContainers()));
-        createPcnPolylines(layer_pcn.getContainers());
+        layer_pcn.hasContainers();
+        createPcn(layer_pcn.getContainers());
         layer_pcn.removeLayerFromMap();
     }
 
-
-    public void hidePCN() {
-        for (Polyline polyline : arrayList_pcn) {
-            polyline.remove();
-        }
-        arrayList_pcn = new ArrayList<Polyline>();
-    }
-
-
-    public void createPcnPolylines(Iterable<KmlContainer> containers) {
+    public void createPcn(Iterable<KmlContainer> containers){
         for (KmlContainer container : containers) {
             //Log.i("Hi I am here!", "240");
             if (container.hasContainers()) {
                 //Log.i("Hi I am here!", "242");
-                createPcnPolylines(container.getContainers());
-            } else {
+                createPcn(container.getContainers());
+            }
+            else {
                 //Log.i("Hi I am here!", "246");
-                for (KmlPlacemark placemark : container.getPlacemarks()) {
+                for (KmlPlacemark placemark : container.getPlacemarks()){
                     //Log.i("typeis", placemark.getGeometry().getGeometryType());
 
-                    if (placemark.getGeometry().getGeometryType().equals("LineString")) {
+                    if(placemark.getGeometry().getGeometryType().equals("LineString")) {
                         KmlLineString lineString = (KmlLineString) placemark.getGeometry();
                         //LatLng latLng = new LatLng(point.getGeometryObject().latitude, point.getGeometryObject().longitude);
                         String description = placemark.getProperty("description");
 
-                        int start = description.indexOf("<th>PARK</th>\n") + "<th>PARK</th>\n".length();
+                        int start = description.indexOf("<th>PARK</th>") + "<th>PARK</th>".length() + 2;
                         int end = description.indexOf("</td>", start);
                         start += "<td>".length();
                         String parkName = description.substring(start, end);
 
-                        start = description.indexOf("<th>PCN_LOOP</th>\n") + "<th>PCN_LOOP</th>\n".length();
+                        start = description.indexOf("<th>PCN_LOOP</th>") + "<th>PCN_LOOP</th>".length() + 2;
                         end = description.indexOf("</td>", start);
                         start += "<td>".length();
                         String pcnLoopName = description.substring(start, end);
@@ -436,85 +531,137 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                         tag.add(pcnLoopName);
                         polyline.setTag(tag);
                         arrayList_pcn.add(polyline);
+                        polyline.setVisible(false);
 
+                        ArrayList<String> item = new ArrayList<>();
+                        item.add(parkName);
+                        item.add(pcnLoopName);
+                        database_pcn.add(item);
                     }
                 }
             }
         }
     }
 
-
-//    public void showCarpark() throws IOException, XmlPullParserException {
-//        //Log.i("qwe", "success");
-//
-//        //CSVReader reader = new CSVReader(new FileReader("C:\\Users\\11219\\AndroidStudioProjects\\Gmap\\app\\src\\main\\res\\raw\\hdb_carpark.csv"));
-//        //Log.i("qwe", "success");
-//        InputStream is = getResources().openRawResource(com.example.connectme.R.raw.hdb_carpark);
-//        BufferedReader reader = new BufferedReader(new InputStreamReader(is, Charset.forName("UTF-8")));
-//        String nextLine = "";
-//        nextLine = reader.readLine();
-//        try {
-//            while ((nextLine = reader.readLine()) != null) {
-//                //Log.i("qwe", nextLine[0]);
-//                String[] tokens = nextLine.split(",");
-//                Double svy_x = Double.parseDouble(tokens[2].substring(1,tokens[2].length()-1));
-//                Double svy_y = Double.parseDouble(tokens[3].substring(1,tokens[3].length()-1));
-//                SVY21Coordinate svy = new SVY21Coordinate(svy_y, svy_x);
-//                LatLonCoordinate latlon = SVY21.computeLatLon(svy);
-//                LatLng latLng= new LatLng(latlon.getLatitude(), latlon.getLongitude());
-//                String name = tokens[0].substring(1,tokens[0].length()-1) + ", " + tokens[1].substring(1,tokens[1].length()-1);
-//                Marker marker = mMap.addMarker(new MarkerOptions().position(latLng).title(name).icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_YELLOW)));
-//                arrayList_carpark.add(marker);
-//            }
-//        } catch (IOException e) {
-//
-//
-//        }
-//    }
-//
-//
-//    public void hideCarpark(){
-//        for(Marker marker : arrayList_carpark){
-//            marker.remove();
-//        }
-//        arrayList_carpark = new ArrayList<Marker>();
-//    }
-
-
-    public void showHawker() throws IOException, XmlPullParserException {
-        layer_hawker = new KmlLayer(mMap, com.example.connectme.R.raw.hawker_centres_kml, this);
-        layer_hawker.addLayerToMap();
-        createHawkerMarkers(layer_hawker.getContainers());
-        layer_hawker.removeLayerFromMap();
+    public ArrayList<ArrayList<String>> getMapPcn(){
+        return database_pcn;
     }
 
 
-    public void hideHawker() {
-        for (Marker marker : arrayList_hawker) {
+
+
+    /*
+    public void showCarpark() throws IOException, XmlPullParserException {
+        //Log.i("qwe", "success");
+
+        //CSVReader reader = new CSVReader(new FileReader("C:\\Users\\11219\\AndroidStudioProjects\\Gmap\\app\\src\\main\\res\\raw\\hdb_carpark.csv"));
+        //Log.i("qwe", "success");
+        InputStream is = getResources().openRawResource(R.raw.hdb_carpark);
+        BufferedReader reader = new BufferedReader(new InputStreamReader(is, Charset.forName("UTF-8")));
+        String nextLine = "";
+        nextLine = reader.readLine();
+        try {
+            while ((nextLine = reader.readLine()) != null) {
+                //Log.i("qwe", nextLine[0]);
+                String[] tokens = nextLine.split(",");
+                Double svy_x = Double.parseDouble(tokens[2].substring(1,tokens[2].length()-1));
+                Double svy_y = Double.parseDouble(tokens[3].substring(1,tokens[3].length()-1));
+                SVY21Coordinate svy = new SVY21Coordinate(svy_y, svy_x);
+                LatLonCoordinate latlon = SVY21.computeLatLon(svy);
+                LatLng latLng= new LatLng(latlon.getLatitude(), latlon.getLongitude());
+                String name = tokens[0].substring(1,tokens[0].length()-1) + ", " + tokens[1].substring(1,tokens[1].length()-1);
+                Marker marker = mMap.addMarker(new MarkerOptions().position(latLng).title(name).icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_YELLOW)));
+                arrayList_carpark.add(marker);
+            }
+        } catch (IOException e) {
+
+
+        }
+    }
+
+
+    public void hideCarpark(){
+        for(Marker marker : arrayList_carpark){
             marker.remove();
         }
-        arrayList_hawker = new ArrayList<Marker>();
+        arrayList_carpark = new ArrayList<Marker>();
+    }
+
+     */
+
+
+
+
+    public void showHawker(){
+        for(Marker marker : arrayList_hawker) {
+            marker.setVisible(true);
+            //marker.setClickable(true);
+        }
     }
 
 
-    public void createHawkerMarkers(Iterable<KmlContainer> containers) {
+    public void hideHawker(){
+        for(Marker marker : arrayList_hawker) {
+            marker.setVisible(false);
+            //marker.setClickable(false);
+        }
+    }
+
+    public void createHawkerMarkers() throws IOException, XmlPullParserException {
+        layer_hawker = new KmlLayer(mMap, R.raw.hawker_centres_kml, this);
+        layer_hawker.addLayerToMap();
+        createHawker(layer_hawker.getContainers());
+        layer_hawker.removeLayerFromMap();
+    }
+    public void createHawker(Iterable<KmlContainer> containers) {
         for (KmlContainer container : containers) {
             if (container.hasContainers()) {
-                createHawkerMarkers(container.getContainers());
-            } else for (KmlPlacemark placemark : container.getPlacemarks()) {
-                if (placemark.getGeometry().getGeometryType().equals("Point")) {
+                createHawker(container.getContainers());
+            }
+            else for (KmlPlacemark placemark : container.getPlacemarks()){
+                if(placemark.getGeometry().getGeometryType().equals("Point")) {
                     KmlPoint point = (KmlPoint) placemark.getGeometry();
                     LatLng latLng = new LatLng(point.getGeometryObject().latitude, point.getGeometryObject().longitude);
                     String description = placemark.getProperty("description");
-                    int start = description.indexOf("<th>NAME</th>\n") + "<th>NAME</th>\n".length();
+
+                    int start = description.indexOf("<th>NAME</th>") + "<th>NAME</th>".length() + 2;
+                    Log.i("des", description);
+                    Log.i("Start", Integer.toString(start));
                     int end = description.indexOf("</td>", start);
+                    Log.i("End", Integer.toString(end));
                     start += "<td>".length();
+                    Log.i("Start2", Integer.toString(start));
                     String hawkerName = description.substring(start, end);
+
+
+                    start = description.indexOf("<th>ADDRESSSTREETNAME</th>") + "<th>ADDRESSSTREETNAME</th>".length() + 2;
+                    end = description.indexOf("</td>", start);
+                    start += "<td>".length();
+                    String streetName = description.substring(start, end);
+
+                    start = description.indexOf("<th>PHOTOURL</th>") + "<th>PHOTOURL</th>".length() + 2;
+                    end = description.indexOf("</td>", start);
+                    start += "<td>".length();
+                    String url = description.substring(start, end);
+
+
                     Marker marker = mMap.addMarker(new MarkerOptions().position(latLng).title(hawkerName).icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_RED)));
                     arrayList_hawker.add(marker);
+                    marker.setVisible(false);
+                    //marker.setClickable(false);
 
+                    ArrayList<String> item = new ArrayList<>();
+                    item.add(hawkerName);
+                    Log.i("hawkername", hawkerName);
+                    item.add(streetName);
+                    item.add(url);
+                    database_hawker.add(item);
                 }
             }
         }
+    }
+
+    public ArrayList<ArrayList<String>> getMapHawker(){
+        return database_hawker;
     }
 }
