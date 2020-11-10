@@ -11,7 +11,6 @@ public class Account {
     private String email;
     private String password;
     private ArrayList<Profile> profiles;
-    private ArrayList<History> history;
 
     public Account(String email, String password, ArrayList<Profile> profiles) {
         this.email = email;

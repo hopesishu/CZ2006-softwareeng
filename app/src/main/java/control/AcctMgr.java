@@ -46,14 +46,12 @@ public class AcctMgr implements AccountMgrInterface {
     private String userID;
     private DatabaseReference myRef;
     private FirebaseDatabase mFirebaseDatabase;
-    private HistoryMgr historyMgr;
 
     public AcctMgr()
     {
         mAuth = FirebaseAuth.getInstance();
         mFirebaseDatabase = FirebaseDatabase.getInstance();
         myRef = mFirebaseDatabase.getReference();
-        historyMgr = new HistoryMgr();
     }
 
 
