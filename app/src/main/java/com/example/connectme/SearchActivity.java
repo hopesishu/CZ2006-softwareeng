@@ -29,7 +29,6 @@ public class SearchActivity extends AppCompatActivity {
     List<Object> polylineList;
     boolean isHawker = true;
     Random r;
-    MapsActivity mActivity = new MapsActivity();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,11 +38,11 @@ public class SearchActivity extends AppCompatActivity {
         parkDatabaseList = Park.getParkDatabase();
         ArrayList<ArrayList<String>> listOfLists = new ArrayList<ArrayList<String>>();
         if (select == "hawker"){
-            listOfLists = mActivity.getMapHawker();
+            listOfLists = MapsActivity.database_hawker.getDatabase();
         }
         else if (select == "park"){
             isHawker = false;
-            listOfLists = mActivity.getMapPcn();
+            listOfLists = MapsActivity.database_pcn.getDatabase();
             for (int i=0; i<listOfLists.size(); i++) {
                 r = new Random();
                 int ranNum = r.nextInt(20);
