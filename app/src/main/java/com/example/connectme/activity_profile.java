@@ -10,6 +10,7 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
@@ -56,6 +57,12 @@ public class activity_profile extends AppCompatActivity {
             }
         });
 
+        //linking toolbar
+        Toolbar toolbar = findViewById(R.id.profile_toolbar);
+        toolbar.setNavigationIcon(R.drawable.ic_arrow_back_24dp);
+        toolbar.setNavigationOnClickListener(v -> {
+            onBackPressed(); // Implemented by activity
+        });
 
         //linking bottom navigation bar
         BottomNavigationView bottomNavigationView = findViewById(R.id.bottomNavigationView);
@@ -99,5 +106,11 @@ public class activity_profile extends AppCompatActivity {
         uId = event.getCustomMessage();
         //DisplayName.setText(usernameImported);
 
+    }
+
+    @Override
+    public void onBackPressed() {
+        startActivity(new Intent(this, activity_settings.class));
+        finish();
     }
 }
