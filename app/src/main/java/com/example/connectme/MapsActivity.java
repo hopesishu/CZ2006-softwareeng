@@ -70,6 +70,7 @@ import java.nio.charset.Charset;
 import java.util.ArrayList;
 
 import control.ProfileMgr;
+import entity.LocationData;
 
 /*
 import org.greenrobot.eventbus.EventBus;
@@ -94,8 +95,8 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     private boolean isPcnShown = false;
     private ArrayList<Polyline> arrayList_navigation = new ArrayList<Polyline>();
 
-    private ArrayList<ArrayList<String>> database_pcn = new ArrayList<ArrayList<String>>();
-    private ArrayList<ArrayList<String>> database_hawker =  new ArrayList<ArrayList<String>>();
+    public static LocationData database_pcn = new LocationData();
+    public static LocationData database_hawker =  new LocationData();
 
     private Button button_navigate;
 
@@ -543,10 +544,6 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         }
     }
 
-    public ArrayList<ArrayList<String>> getMapPcn(){
-        return database_pcn;
-    }
-
 
 
 
@@ -625,12 +622,12 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                     String description = placemark.getProperty("description");
 
                     int start = description.indexOf("<th>NAME</th>") + "<th>NAME</th>".length() + 2;
-                    Log.i("des", description);
-                    Log.i("Start", Integer.toString(start));
+                    //Log.i("des", description);
+                    //Log.i("Start", Integer.toString(start));
                     int end = description.indexOf("</td>", start);
-                    Log.i("End", Integer.toString(end));
+                    //Log.i("End", Integer.toString(end));
                     start += "<td>".length();
-                    Log.i("Start2", Integer.toString(start));
+                    //Log.i("Start2", Integer.toString(start));
                     String hawkerName = description.substring(start, end);
 
 
@@ -643,6 +640,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                     end = description.indexOf("</td>", start);
                     start += "<td>".length();
                     String url = description.substring(start, end);
+                    Log.i("URL", url);
 
 
                     Marker marker = mMap.addMarker(new MarkerOptions().position(latLng).title(hawkerName).icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_RED)));
@@ -661,7 +659,10 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         }
     }
 
+    /*
     public ArrayList<ArrayList<String>> getMapHawker(){
         return database_hawker;
     }
+
+     */
 }
