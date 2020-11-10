@@ -26,6 +26,9 @@
             android:name=".activity_profile"
             android:label="@string/title_activity_profile"
             android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".activity_feedback"
+            android:theme="@style/AppTheme.NoActionBar" />
 
         <activity
             android:name=".CreateAccountActivity"

@@ -1,9 +1,6 @@
 package entity;
 
 
-import java.util.ArrayList;
-import java.util.List;
-
 /**
  * Class for Object Profile
  * Contains profile's name , date of birth, list of park connector log entry and boolean var to indicate if this is current profile
@@ -11,7 +8,6 @@ import java.util.List;
 public class Profile {
     private String name;
     private String dateOfBirth;
-    private List<ParkLogEntry> parkLogEntries;
     private boolean thisProfile;
     private String history;
 
@@ -19,18 +15,10 @@ public class Profile {
     public Profile() {
     }
 
-    public Profile(String name, String dateOfBirth, ArrayList<ParkLogEntry> parkLogEntries) {
-        this.name = name;
-        this.dateOfBirth = dateOfBirth;
-        this.parkLogEntries = parkLogEntries;
-        this.thisProfile = true;
-    }
-
     public Profile(String name, String dateOfBirth)
     {
         this.name = name;
         this.dateOfBirth = dateOfBirth;
-        parkLogEntries = new ArrayList<>();
         thisProfile = true;
         history = " ";
     }
@@ -51,14 +39,6 @@ public class Profile {
 
     public void setDateOfBirth(String dateOfBirth) {
         this.dateOfBirth = dateOfBirth;
-    }
-
-    public List<ParkLogEntry> getParkLogEntries() {
-        return parkLogEntries;
-    }
-
-    public void setParkLogEntries(List<ParkLogEntry> parkLogEntries) {
-        this.parkLogEntries = parkLogEntries;
     }
 
     public boolean getThisProfile() {
