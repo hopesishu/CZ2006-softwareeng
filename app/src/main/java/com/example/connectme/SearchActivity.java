@@ -32,23 +32,29 @@ public class SearchActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        String select = getIntent().getStringExtra("Search Option");
+        String select = getIntent().getStringExtra("SearchOption");
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_search);
         parkDatabaseList = Park.getParkDatabase();
         ArrayList<ArrayList<String>> listOfLists = new ArrayList<ArrayList<String>>();
-        if (select == "hawker"){
-            listOfLists = MapsActivity.database_hawker.getDatabase();
-        }
-        else if (select == "park"){
-            isHawker = false;
-            listOfLists = MapsActivity.database_pcn.getDatabase();
-            for (int i=0; i<listOfLists.size(); i++) {
-                r = new Random();
-                int ranNum = r.nextInt(20);
-                listOfLists.get(i).set(2, parkDatabaseList.get(ranNum));
-            }
-        }
+//        if (select == "hawker"){
+//            Toast.makeText(this, "intent passing works", Toast.LENGTH_SHORT).show();
+//            Log.i("works", "onCreate: Works");
+//            listOfLists = MapsActivity.database_hawker.getDatabase();
+//        }
+//        else if (select == "park"){
+//            Toast.makeText(this, "intent passing works", Toast.LENGTH_SHORT).show();
+//            Log.i("works", "onCreate: Works");
+//            isHawker = false;
+//            listOfLists = MapsActivity.database_pcn.getDatabase();
+//            for (int i=0; i<listOfLists.size(); i++) {
+//                r = new Random();
+//                int ranNum = r.nextInt(20);
+//                listOfLists.get(i).set(2, parkDatabaseList.get(ranNum));
+//            }
+//        }
+
+        listOfLists = MapsActivity.database_hawker.getDatabase();
 
 //        ArrayList<String> list1 = new ArrayList<String>();
 //        list1.add("Jurong West Hawker center");

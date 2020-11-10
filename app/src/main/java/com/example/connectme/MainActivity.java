@@ -58,13 +58,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         switch(view.getId()) {
             case R.id.cardParkConnectors:
                 i = new Intent(this, SearchActivity.class);
-                i.putExtra("Search Option", "park");
+                i.putExtra("SearchOption", "park");
                 startActivity(i);
                 break;
 
             case R.id.cardHawkerCentres:
                 i = new Intent(this, SearchActivity.class);
-                i.putExtra("Search Option", "hawker");
+                i.putExtra("SearchOption", "hawker");
                 startActivity(i);
                 break;
         }
