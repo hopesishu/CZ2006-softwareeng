@@ -5,6 +5,7 @@
     <color name="appBackground">#FFFFFF</color>
     <color name="colorWhite">#FFFFFF</color>
     <color name="colorBlack">#000000</color>
+    <color name="colorGrey">#9E9E9E</color>
     <color name="yellow">#FFFF00</color>
     <color name="red">#FF0000</color>
     <color name="green">#32CD32</color>

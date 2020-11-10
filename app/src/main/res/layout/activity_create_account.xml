@@ -41,6 +41,7 @@
         android:layout_marginLeft="70dp"
         android:text="@string/new_account"
         android:textColor="@color/colorWhite"
+        android:textStyle="bold"
         android:textSize="24sp"
         app:layout_constraintBottom_toBottomOf="@id/create_account_toolbar"
 
