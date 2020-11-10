@@ -544,6 +544,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                         ArrayList<String> item = new ArrayList<>();
                         item.add(parkName);
                         item.add(pcnLoopName);
+                        item.add(" ");
                         database_pcn.add(item);
                     }
                 }
