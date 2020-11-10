@@ -69,7 +69,7 @@ import java.io.InputStreamReader;
 import java.nio.charset.Charset;
 import java.util.ArrayList;
 
-import control.HistoryMgr;
+import control.ProfileMgr;
 
 /*
 import org.greenrobot.eventbus.EventBus;
@@ -123,7 +123,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     //private FirebaseDatabase mFirebaseDatabase = FirebaseDatabase.getInstance();
     private String userID;
 
-    private HistoryMgr mHistoryMgr = new HistoryMgr();
+    private ProfileMgr mProfileMgr = new ProfileMgr();
 
     private String uId;
     private String intent_name;
@@ -386,7 +386,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         Log.i("navigate", navigation_target);
         String url = getUrl(current_LatLng, navigation_LatLng, "driving");
         new FetchURL(MapsActivity.this).execute(url, "driving");
-        mHistoryMgr.addHistory(navigation_target, uId);
+        mProfileMgr.editHistory(navigation_target, uId);
 
     }
 
