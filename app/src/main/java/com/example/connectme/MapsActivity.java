@@ -10,9 +10,11 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.CompoundButton;
 
+import androidx.annotation.Nullable;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.FragmentActivity;
+import androidx.fragment.app.FragmentTransaction;
 
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationServices;
@@ -91,14 +93,20 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
     private String uId;
 
+
+
+
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(com.example.connectme.R.layout.activity_maps);
         // Obtain the SupportMapFragment and get notified when the map is ready to be used.
-        SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
-                .findFragmentById(com.example.connectme.R.id.map);
-        mapFragment.getMapAsync(this);
+        SupportMapFragment mMapFragment = SupportMapFragment.newInstance();
+        FragmentTransaction fragmentTransaction =
+                getSupportFragmentManager().beginTransaction();
+        fragmentTransaction.add(R.id.map, mMapFragment);
+        fragmentTransaction.commit();
+        mMapFragment.getMapAsync(this);
         button_navigate = (Button) findViewById(com.example.connectme.R.id.button_navigate);
         button_navigate.setVisibility(View.INVISIBLE);
         button_navigate.setEnabled(false);
