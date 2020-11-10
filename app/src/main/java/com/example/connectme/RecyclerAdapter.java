@@ -28,12 +28,14 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ViewHo
     List<String> nameListConstant;
     List<String> addressList;
     List<String> urlList;
+    boolean isHawker;
     Context context;
 
-    public RecyclerAdapter(List<String> nameList, List<String> addressList, List<String> urlList) {
+    public RecyclerAdapter(List<String> nameList, List<String> addressList, List<String> urlList, boolean isHawker) {
         this.nameList = nameList;
         this.addressList = addressList;
         this.urlList = urlList;
+        this.isHawker = isHawker;
         nameListConstant = new ArrayList<>();
         nameListConstant.addAll(nameList);
         nameListAll = new ArrayList<>();
@@ -133,9 +135,10 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ViewHo
         @Override
         public void onClick(View view) {
             Toast.makeText(view.getContext(), nameList.get(getAdapterPosition()), Toast.LENGTH_SHORT).show();
-            String select = nameList.get(getAdapterPosition()); // change to polyline list
+            String select = nameList.get(getAdapterPosition()); // change to object to polyline
             Intent intent = new Intent(view.getContext(), LoginActivity.class);
-            intent.putExtra("Location Selected", select);
+            intent.putExtra("name", select);
+            intent.putExtra("isHawker", isHawker);
             // String select = getIntent().getStringExtra("Location Selected"); //use in maps activity to obtain
             view.getContext().startActivity(intent);
         }

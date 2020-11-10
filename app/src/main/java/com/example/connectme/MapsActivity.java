@@ -48,6 +48,7 @@ import java.util.ArrayList;
 
 public class MapsActivity extends FragmentActivity implements OnMapReadyCallback, TaskLoadedCallback {
 
+    //add in on create call haoran's function for list
     private GoogleMap mMap;
 
     private FloatingActionButton button_location;

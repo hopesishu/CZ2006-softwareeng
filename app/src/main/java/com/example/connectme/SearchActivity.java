@@ -1,4 +1,5 @@
 package com.example.connectme;
+
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -10,6 +11,9 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
+
+import entity.Park;
 
 
 public class SearchActivity extends AppCompatActivity {
@@ -21,14 +25,34 @@ public class SearchActivity extends AppCompatActivity {
     List<String> nameList;
     List<String> addressList;
     List<String> urlList;
+    ArrayList<String> parkDatabaseList;
     List<Object> polylineList;
+    boolean isHawker = true;
+    Random r;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        String select = getIntent().getStringExtra("Search Option");
+        if (select == "park") {
+
+        }
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_search);
+        parkDatabaseList = Park.getParkDatabase();
+        ArrayList<ArrayList<String>> listOfLists = new ArrayList<ArrayList<String>>();
+//        if (select == "hawker"){
+//            //call hawker list, listOfLists = function
+//        }
+//        else if (select == "park"){
+//            isHawker = false;
+//            //call park list, listOfLists = function
+//            for (int i=0; i<listOfLists.size(); i++) {
+//                r = new Random();
+//                int ranNum = r.nextInt(20);
+//                listOfLists.get(i).set(2, parkDatabaseList.get(ranNum));
+//            }
+//        }
 
-        List<ArrayList<String>> listOfLists = new ArrayList<ArrayList<String>>();
         ArrayList<String> list1 = new ArrayList<String>();
         list1.add("Jurong West Hawker center");
         list1.add("Jurong West st 100");
@@ -64,7 +88,7 @@ public class SearchActivity extends AppCompatActivity {
         addressList = new ArrayList<>();
         urlList = new ArrayList<>();
 
-        for (List<String> listitem : listOfLists) {
+        for (ArrayList<String> listitem : listOfLists) {
             for (String item : listitem ) {
                 if (item == listitem.get(0)) {
                     nameList.add(item);
@@ -78,6 +102,7 @@ public class SearchActivity extends AppCompatActivity {
             }
         }
         // add in list for polyline
+
 
 
 
@@ -107,7 +132,7 @@ public class SearchActivity extends AppCompatActivity {
         moviesList.add("Spider-Man: Far From Home");
 
         recyclerView = findViewById(R.id.recyclerView);
-        recyclerAdapter = new RecyclerAdapter(nameList, addressList, urlList);
+        recyclerAdapter = new RecyclerAdapter(nameList, addressList, urlList, isHawker);
 //        recyclerView.setLayoutManager(new LinearLayoutManager(this));
         recyclerView.setAdapter(recyclerAdapter);
 
