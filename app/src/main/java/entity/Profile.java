@@ -13,6 +13,7 @@ public class Profile {
     private String dateOfBirth;
     private List<ParkLogEntry> parkLogEntries;
     private boolean thisProfile;
+    private String history;
 
 
     public Profile() {
@@ -31,6 +32,7 @@ public class Profile {
         this.dateOfBirth = dateOfBirth;
         parkLogEntries = new ArrayList<>();
         thisProfile = true;
+        history = " ";
     }
 
 
@@ -66,4 +68,8 @@ public class Profile {
     public void setThisProfile(boolean thisProfile) {
         this.thisProfile = thisProfile;
     }
+
+    public String getHistory() {return history;}
+
+    public void setHistory(String history) {this.history = history;}
 }

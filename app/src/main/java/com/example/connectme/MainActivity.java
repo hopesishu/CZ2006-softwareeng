@@ -1,15 +1,14 @@
 package com.example.connectme;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.cardview.widget.CardView;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
 
-import com.google.android.material.bottomnavigation.BottomNavigationItemView;
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.cardview.widget.CardView;
+
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener{
@@ -37,6 +36,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                 switch(item.getItemId()){
                     case R.id.navigationMap:
+                        startActivity(new Intent(MainActivity.this, MapsActivity.class));
+//                        overridePendingTransition(0,0);
                         return true;
                     case R.id.navigationInfo:
                         startActivity(new Intent(MainActivity.this, activity_settings.class));
@@ -56,12 +57,14 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         switch(view.getId()) {
             case R.id.cardParkConnectors:
-                i = new Intent(this, activity_parkconnector.class);
+                i = new Intent(this, SearchActivity.class);
+                i.putExtra("Search Option", "park");
                 startActivity(i);
                 break;
 
             case R.id.cardHawkerCentres:
-                i = new Intent(this, activity_hawkercentres.class);
+                i = new Intent(this, SearchActivity.class);
+                i.putExtra("Search Option", "hawker");
                 startActivity(i);
                 break;
         }

@@ -131,9 +131,6 @@ public class AcctMgr implements AccountMgrInterface {
 
                         Account user = new Account(email, password, firstName, lastName, dob);
                         myRef.child("users").child(userID).setValue(user);
-                        historyMgr.addHistory("Jurong West", userID);
-                        historyMgr.addHistory("NTU", userID);
-                        historyMgr.addHistory("Pioneer", userID);
 
 
 

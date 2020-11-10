@@ -50,7 +50,6 @@ public class CreateAccountActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Log.d(TAG, "onClick: Submit pressed.");
-                final String password = CreateAccountActivity.this.getInput(passwordText);
                 final String email = CreateAccountActivity.this.getInput(emailText);
                 final String confirmPassword = CreateAccountActivity.this.getInput(confirmPasswordText);
                 final String firstName = CreateAccountActivity.this.getInput(firstNameText);

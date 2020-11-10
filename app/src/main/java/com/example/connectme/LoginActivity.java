@@ -31,8 +31,8 @@ public class LoginActivity extends AppCompatActivity {
         final Button loginButton = findViewById(R.id.login);
         final ProgressBar progressBar = findViewById(R.id.loading);
         final TextView createAccount = findViewById(R.id.create_account);
-        final TextView forgotPassword = findViewById(R.id.forgot_password);
-        final Button profileButton = findViewById(R.id.profile);
+//        final TextView forgotPassword = findViewById(R.id.forgot_password);
+//        final Button profileButton = findViewById(R.id.profile);
 
         loginButton.setOnClickListener(v -> {
             final String email = getInput(emailEditText);
@@ -64,11 +64,11 @@ public class LoginActivity extends AppCompatActivity {
         });
 
 
-        profileButton.setOnClickListener(v -> {
-                Intent intent = new Intent(profileButton.getContext(), activity_profile.class);
-                startActivity(intent);
-                finish();
-        });
+//        profileButton.setOnClickListener(v -> {
+//                Intent intent = new Intent(profileButton.getContext(), activity_profile.class);
+//                startActivity(intent);
+//                finish();
+//        });
     }
 
     public String getInput(EditText editText) {

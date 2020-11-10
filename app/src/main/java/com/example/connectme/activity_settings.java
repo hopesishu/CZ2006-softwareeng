@@ -1,6 +1,5 @@
 package com.example.connectme;
 
-import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -13,7 +12,6 @@ import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -46,6 +44,11 @@ public class activity_settings extends AppCompatActivity {
                     Intent intent = new Intent(view.getContext(), activity_profile.class);
                     startActivity(intent);
                 }
+
+                if (position == 4) {
+                    Intent intent = new Intent(view.getContext(), LoginActivity.class);
+                    startActivity(intent);
+                }
             }
         });
 
@@ -59,9 +62,9 @@ public class activity_settings extends AppCompatActivity {
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                 switch(item.getItemId()){
                     case R.id.navigationMap:
-                        //startActivity(new Intent(getApplicationContext(), activity_map.class));
-                        //overridePendingTransition(0,0);
-                        //return true;
+                        startActivity(new Intent(getApplicationContext(), MapsActivity.class));
+                        overridePendingTransition(0,0);
+                        return true;
                     case R.id.navigationInfo:
                         return true;
                     case R.id.navigationHome:

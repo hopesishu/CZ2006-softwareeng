@@ -3,8 +3,6 @@ package com.example.connectme;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
-import android.view.View;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
@@ -34,6 +32,9 @@ public class activity_profile extends AppCompatActivity {
             EventBus.getDefault().register(this);
         }
 
+        Toolbar toolbar = findViewById(R.id.profile_toolbar);
+        toolbar.setNavigationIcon(R.drawable.ic_arrow_back_24dp);
+
         profileMgr = new ProfileMgr();
         HistoryMgr historyMgr = new HistoryMgr();
         String apple = "2";
@@ -41,23 +42,10 @@ public class activity_profile extends AppCompatActivity {
         TextView profile_name = (TextView) findViewById(R.id.profile_name);
         TextView dateOfBirth = (TextView) findViewById(R.id.date_of_birth);
         TextView park_history = (TextView) findViewById(R.id.park_history);
-        final EditText editHistoryText = findViewById(R.id.edit_history_str);
-
-        final Button edit_history = findViewById(R.id.edit_history);
 
         profileMgr.retrieveCurrentProfileName(value -> profile_name.setText(value), uId);
         profileMgr.retrieveCurrentDOB(value -> dateOfBirth.setText(value), uId);
-        profileMgr.retrieveHistory(value -> park_history.setText(value), uId);
-
-        edit_history.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                //Log.d(TAG, "onClick: Submit pressed.");
-                String history = activity_profile.this.getInput(editHistoryText);
-                history = park_history.getText() + "\n" + history + ".";
-                profileMgr.editHistory(uId, history);
-            }
-        });
+        historyMgr.getHistory(value -> park_history.setText(value), uId);
 
 
         //linking bottom navigation bar
@@ -85,7 +73,17 @@ public class activity_profile extends AppCompatActivity {
             }
         });
 
+        toolbar.setNavigationOnClickListener(v -> {
+            onBackPressed(); // Implemented by activity
+        });
     }
+
+    @Override
+    public void onBackPressed() {
+        startActivity(new Intent(this, activity_settings.class));
+        finish();
+    }
+
     public String getInput(EditText editText) {
         return editText.getText().toString().trim();
     }
