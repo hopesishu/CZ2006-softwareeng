@@ -44,6 +44,10 @@ public class activity_settings extends AppCompatActivity {
                     Intent intent = new Intent(view.getContext(), activity_profile.class);
                     startActivity(intent);
                 }
+                if (position == 2) {
+                    Intent intent = new Intent(view.getContext(), activity_contactus.class);
+                    startActivity(intent);
+                }
                 if (position == 3) {
                     Intent intent = new Intent(view.getContext(), activity_feedback.class);
                     startActivity(intent);
