@@ -16,4 +16,16 @@ public class LocationData {
     public ArrayList<ArrayList<String>> getDatabase() {
         return data;
     }
+
+    public String toString(){
+        String output = "";
+        for (ArrayList<String> item : data){
+            for (String string : item){
+                output += string;
+            }
+            output += "\n";
+        }
+        return output;
+    }
+
 }
