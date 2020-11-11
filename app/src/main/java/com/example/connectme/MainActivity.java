@@ -2,6 +2,7 @@ package com.example.connectme;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
@@ -15,13 +16,16 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 public class MainActivity extends AppCompatActivity implements View.OnClickListener{
 
     private CardView parkConnectorCard, hawkerCentreCard;
-    private String nearestPark;
-    private String setNearestPark;
+    private static String nearestPark = " ";
+    private static String setNearestPark = " ";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         nearestPark = getIntent().getStringExtra("nearest");
-        if (!nearestPark.equals(null)) {
+        Log.i("nearestPark", "nearest park" + nearestPark);
+        Log.i("nearestParktemp", "nearest park" + setNearestPark);
+
+        if (nearestPark != null) {
             setNearestPark = nearestPark;
         }
         super.onCreate(savedInstanceState);
