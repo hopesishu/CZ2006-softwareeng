@@ -20,7 +20,7 @@ public class Profile {
         this.name = name;
         this.dateOfBirth = dateOfBirth;
         thisProfile = true;
-        history = " ";
+        history = "";
     }
 
 

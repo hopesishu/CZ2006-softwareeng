@@ -646,7 +646,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         count++;
         SimpleDateFormat formatter= new SimpleDateFormat("yyyy-MM-dd 'at' HH:mm:ss");
         Date date = new Date(System.currentTimeMillis());
-        value += formatter.format(date) + ", " + navigation_target + ".\n";
+        value += formatter.format(date) + ", " + navigation_target + ".\n\n";
         mProfileMgr.editHistory(uId, value);
     }
 }
