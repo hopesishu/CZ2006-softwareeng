@@ -2,7 +2,6 @@ package com.example.connectme;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 
@@ -13,8 +12,6 @@ import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
-
-import org.apache.commons.lang3.ArrayUtils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -126,6 +123,11 @@ public class SearchActivity extends AppCompatActivity {
             }
         }
 
+        if (nameList.size() <1)
+        {
+            openDialog();
+        }
+
 
         recyclerView = findViewById(R.id.recyclerView);
         recyclerAdapter = new RecyclerAdapter(nameList, addressList, urlList, isHawker);
@@ -184,4 +186,10 @@ public class SearchActivity extends AppCompatActivity {
 
         return super.onCreateOptionsMenu(menu);
     }
+
+    public void openDialog(){
+        LocationPermissionDialog locationPermissionDialog = new LocationPermissionDialog();
+        locationPermissionDialog.show(getSupportFragmentManager(), "location permission dialog");
+    }
+
 }
