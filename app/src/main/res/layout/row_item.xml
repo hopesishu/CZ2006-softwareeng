@@ -43,6 +43,7 @@
         android:layout_marginBottom="10dp"
         android:text="TextView"
 
+        android:drawableLeft="@drawable/ic_location_grey"
         android:textSize="14sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

@@ -44,65 +44,70 @@
         app:layout_constraintBottom_toTopOf="@id/bottomNavigationView"
         app:layout_constraintTop_toBottomOf="@id/about_us_toolbar">
 
-    <TextView
-        android:id="@+id/our_mission_header"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="30dp"
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
 
-        android:text="Our Mission"
-        android:textColor="@color/colorBlack"
-        android:textSize="28sp"
-        android:textStyle="bold"
-        app:layout_constraintTop_toBottomOf="@id/about_us_toolbar"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintBottom_toTopOf="@id/our_mission_text"/>
+        <TextView
+            android:id="@+id/our_mission_header"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="30dp"
 
-    <TextView
-        android:id="@+id/our_mission_text"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="40dp"
-        android:layout_marginEnd="40dp"
-        android:layout_marginBottom="20dp"
+            android:gravity="center"
+            android:text="Our Mission"
+            android:textColor="@color/colorPrimaryDark"
+            android:textSize="28sp"
+            android:textStyle="bold"
+            app:layout_constraintTop_toBottomOf="@id/about_us_toolbar"
+            app:layout_constraintBottom_toTopOf="@id/our_mission_text"/>
 
-        android:gravity="center"
-        android:textSize="18sp"
-        android:text="To connect people with nature and promote a healthy lifestyle"
-        app:layout_constraintTop_toBottomOf="@id/our_mission_header"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintBottom_toTopOf="@id/about_us_header"/>
+        <TextView
+            android:id="@+id/our_mission_text"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="40dp"
+            android:layout_marginEnd="40dp"
+            android:layout_marginBottom="20dp"
 
-    <TextView
-        android:id="@+id/about_us_header"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
+            android:gravity="center"
+            android:textSize="18sp"
+            android:text="To connect people with nature and promote a healthy lifestyle"
+            app:layout_constraintTop_toBottomOf="@id/our_mission_header"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toTopOf="@id/about_us_header"/>
 
-        android:text="About Us"
-        android:textColor="@color/colorBlack"
-        android:textSize="28sp"
-        android:textStyle="bold"
-        app:layout_constraintTop_toBottomOf="@id/our_mission_text"
-        app:layout_constraintBottom_toTopOf="@id/about_us_text"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"/>
+        <TextView
+            android:id="@+id/about_us_header"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
 
-    <TextView
-        android:id="@+id/about_us_text"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="40dp"
-        android:layout_marginEnd="40dp"
+            android:gravity="center"
+            android:text="About Us"
+            android:textColor="@color/colorPrimaryDark"
+            android:textSize="28sp"
+            android:textStyle="bold"
+            app:layout_constraintTop_toBottomOf="@id/our_mission_text"
+            app:layout_constraintBottom_toTopOf="@id/about_us_text" />
 
-        android:gravity="center"
-        android:textSize="18sp"
-        android:text="We are a group of students in NTU who are park activists. Realising that there is little motivation for singaporeans to explore our less visited park connectors, we have created ConnectMe. \n\nWe hope to bring more exposure to our local park connectors as well as the variety of hawker food that surrounds it. \n\nHence, we have brought together 2 of Singapore's unique traits — being known as a Garden City as well as a food haven — and created an app with a local twist."
-        app:layout_constraintTop_toBottomOf="@id/about_us_header"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"/>
+        <TextView
+            android:id="@+id/about_us_text"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="40dp"
+            android:layout_marginEnd="40dp"
+
+            android:gravity="center"
+            android:textSize="18sp"
+            android:text="We are a group of students in NTU who are park activists. Realising that there is little motivation for singaporeans to explore our less visited park connectors, we have created ConnectMe. \n\nWe hope to bring more exposure to our local park connectors as well as the variety of hawker food that surrounds it. \n\nHence, we have brought together 2 of Singapore's unique traits — being known as a Garden City as well as a food haven — and created an app with a local twist."
+            app:layout_constraintTop_toBottomOf="@id/about_us_header"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"/>
+
+        </LinearLayout>
 
     </ScrollView>
 
