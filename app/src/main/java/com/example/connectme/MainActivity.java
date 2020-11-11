@@ -16,10 +16,14 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     private CardView parkConnectorCard, hawkerCentreCard;
     private String nearestPark;
+    private String setNearestPark;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         nearestPark = getIntent().getStringExtra("nearest");
+        if (!nearestPark.equals(null)) {
+            setNearestPark = nearestPark;
+        }
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
@@ -35,7 +39,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         bottomNavigationView.setSelectedItemId(R.id.navigationHome);
 
         TextView pcn_name = (TextView) findViewById(R.id.PCNname);
-        pcn_name.setText(nearestPark);
+        pcn_name.setText(setNearestPark);
 
         bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
