@@ -14,16 +14,16 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         tools:context=".MapsActivity"
-        tools:layout_editor_absoluteX="-16dp"
-        tools:layout_editor_absoluteY="-48dp" />
+        tools:layout_editor_absoluteX="0dp"
+        tools:layout_editor_absoluteY="0dp" />
 
     <com.google.android.material.chip.ChipGroup
         android:id="@+id/chipgroup_filter"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:padding="15dp"
-        android:clipToPadding="false"
+        android:layout_width="290dp"
+        android:layout_height="88dp"
 
+        android:clipToPadding="false"
+        android:padding="15dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
@@ -35,9 +35,13 @@
             android:layout_height="wrap_content"
 
             android:elevation="4dp"
-            android:theme="@style/Theme.MaterialComponents.Light"
+            android:shadowColor="#FFFFFF"
+
             android:text="Park Connectors"
-            />
+            android:textColor="@color/text_color_state_list"
+            android:theme="@style/Theme.MaterialComponents.Light"
+            app:chipBackgroundColor="@color/background_color_state_list"
+            app:rippleColor="#57ADF1" />
 
         <com.google.android.material.chip.Chip
             android:id="@+id/chip_hawker"
@@ -46,8 +50,13 @@
             android:layout_height="wrap_content"
 
             android:elevation="4dp"
+            android:shadowColor="#FFFFFF"
+            android:text="Hawker Center"
+
+            android:textColor="@color/text_color_state_list"
             android:theme="@style/Theme.MaterialComponents.Light"
-            android:text="Hawker Center" />
+            app:chipBackgroundColor="@color/background_color_state_list"
+            app:rippleColor="#57ADF1" />
     </com.google.android.material.chip.ChipGroup>
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
@@ -63,16 +72,18 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/chipgroup_filter" />
 
-    <Button
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/button_navigate"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginBottom="80dp"
+        android:layout_marginTop="110dp"
+        android:layout_marginEnd="16dp"
+        android:clickable="true"
         android:onClick="onNavigationClick"
-        android:text="Navigate"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        android:src="@drawable/ic_navigate"
+        app:backgroundTint="#B0DCCE"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/chipgroup_filter" />
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/bottomNavigationView"
@@ -80,6 +91,6 @@
         android:layout_height="wrap_content"
         app:backgroundTint="@color/colorWhite"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:menu="@menu/menu_bottom_navigation"/>
+        app:menu="@menu/menu_bottom_navigation" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -87,7 +87,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     public static LocationData database_pcn = new LocationData();
     public static LocationData database_hawker =  new LocationData();
 
-    private Button button_navigate;
+    private FloatingActionButton button_navigate;
 
     private String navigation_target;
     private LatLng navigation_LatLng;
@@ -168,7 +168,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         mMapFragment.getMapAsync(this);
 
 
-        button_navigate = (Button)findViewById(R.id.button_navigate);
+        button_navigate = (FloatingActionButton)findViewById(R.id.button_navigate);
         button_navigate.setVisibility(View.INVISIBLE);
         button_navigate.setEnabled(false);
 
@@ -382,7 +382,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         String url = getUrl(current_LatLng, navigation_LatLng, "driving");
         Log.i("url", url);
         new FetchURL(MapsActivity.this).execute(url, "driving");
-        //mProfileMgr.editHistory(navigation_target, uId);
+        mProfileMgr.editHistory(navigation_target, uId);
     }
 
     private String getUrl(LatLng origin, LatLng dest, String directionMode) {
@@ -404,7 +404,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     public void onTaskDone(Object... values){
         Log.i("OnTaskDone", navigation_target);
         if(current_polyline != null) current_polyline.remove();
-        current_polyline = mMap.addPolyline((PolylineOptions)values[0]);
+        current_polyline = mMap.addPolyline(((PolylineOptions)values[0]).color(0xBB8A2BE2));
         arrayList_navigation.add(current_polyline);
 
     }
