@@ -1,5 +1,6 @@
 package com.example.connectme;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
@@ -9,6 +10,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.SearchView;
 import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.RecyclerView;
+
+import org.apache.commons.lang3.ArrayUtils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -29,15 +32,19 @@ public class SearchActivity extends AppCompatActivity {
     ArrayList<String> parkDatabaseList;
     List<Object> polylineList;
     boolean isHawker = true;
+    boolean flag = true;
     Random r;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        int select = getIntent().getIntExtra("SEARCH_OPTION", 10);
+        Intent intent = getIntent();
+        int select = intent.getExtras().getInt("SEARCH_OPTION");
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_search);
         parkDatabaseList = Park.getParkDatabase();
         ArrayList<ArrayList<String>> listOfLists = new ArrayList<ArrayList<String>>();
+        ArrayList<ArrayList<String>> tempList = new ArrayList<ArrayList<String>>();
+
         if (select == 1){
 
             listOfLists = MapsActivity.database_hawker.getDatabase();
@@ -45,10 +52,22 @@ public class SearchActivity extends AppCompatActivity {
         else if (select == 2){
             isHawker = false;
             listOfLists = MapsActivity.database_pcn.getDatabase();
-            Log.i("listoflist", listOfLists.get(0).get(0));
+            for (int i=0; i<listOfLists.size()-1; i++){
+                for (int j=i+1; j<listOfLists.size(); j++) {
+                    if (listOfLists.get(i).get(0).equals(listOfLists.get(j).get(0))) {
+                        flag = false;
+                    }
+                }
+                if (flag) {
+                    tempList.add(listOfLists.get(i));
+
+                }
+                flag =true;
+            }
+            listOfLists = tempList;
             for (int i=0; i<listOfLists.size(); i++) {
                 r = new Random();
-                int ranNum = r.nextInt(20);
+                int ranNum = r.nextInt(60);
                 listOfLists.get(i).set(2, parkDatabaseList.get(ranNum));
             }
         }

@@ -136,7 +136,7 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ViewHo
         public void onClick(View view) {
             Toast.makeText(view.getContext(), nameList.get(getAdapterPosition()), Toast.LENGTH_SHORT).show();
             String select = nameList.get(getAdapterPosition()); // change to object to polyline
-            Intent intent = new Intent(view.getContext(), LoginActivity.class);
+            Intent intent = new Intent(view.getContext(), MapsActivity.class);
             intent.putExtra("name", select);
             intent.putExtra("isHawker", isHawker);
             // String select = getIntent().getStringExtra("Location Selected"); //use in maps activity to obtain
