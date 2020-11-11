@@ -20,8 +20,8 @@
 
     <com.google.android.material.chip.ChipGroup
         android:id="@+id/chipgroup_filter"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_width="290dp"
+        android:layout_height="86dp"
 
         android:clipToPadding="false"
         android:padding="15dp"
