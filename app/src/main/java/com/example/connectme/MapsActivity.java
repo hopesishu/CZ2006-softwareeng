@@ -9,7 +9,6 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.Button;
 import android.widget.CompoundButton;
 
 import androidx.annotation.NonNull;
@@ -24,7 +23,6 @@ import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
-import com.google.android.gms.maps.model.BitmapDescriptor;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.GroundOverlay;
 import com.google.android.gms.maps.model.GroundOverlayOptions;
@@ -37,7 +35,6 @@ import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.chip.Chip;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import com.google.firebase.database.DatabaseReference;
 import com.google.maps.android.PolyUtil;
 import com.google.maps.android.data.kml.KmlContainer;
 import com.google.maps.android.data.kml.KmlLayer;
@@ -56,6 +53,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.concurrent.atomic.AtomicReference;
 
 import control.ProfileMgr;
 import entity.LocationData;
@@ -67,7 +65,7 @@ import org.greenrobot.eventbus.ThreadMode;
 
  */
 
-public class MapsActivity extends FragmentActivity implements OnMapReadyCallback, TaskLoadedCallback{
+public class MapsActivity extends FragmentActivity implements OnMapReadyCallback, TaskLoadedCallback, ProfileMgr.MyCallbackString {
 
     private GoogleMap mMap;
 
@@ -117,6 +115,8 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     private boolean intent_isHawker;
 
     private String nearest_pcn_name;
+
+    public int count = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -382,7 +382,11 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         String url = getUrl(current_LatLng, navigation_LatLng, "driving");
         Log.i("url", url);
         new FetchURL(MapsActivity.this).execute(url, "driving");
-        mProfileMgr.editHistory(navigation_target, uId);
+        count = 0;
+
+        mProfileMgr.retrieveHistory(this, uId);
+
+        //mProfileMgr.editHistory(uId, navigation_target);
     }
 
     private String getUrl(LatLng origin, LatLng dest, String directionMode) {
@@ -631,5 +635,13 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                 }
             }
         }
+    }
+
+    @Override
+    public void onCallback(String value) {
+        if (count > 0) return;
+        count++;
+        value += navigation_target + "\n";
+        mProfileMgr.editHistory(uId, value);
     }
 }
