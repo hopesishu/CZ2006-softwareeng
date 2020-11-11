@@ -50,8 +50,10 @@ import org.greenrobot.eventbus.ThreadMode;
 import org.xmlpull.v1.XmlPullParserException;
 
 import java.io.IOException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Date;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicReference;
 
@@ -639,9 +641,12 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
     @Override
     public void onCallback(String value) {
+        Log.i("return", value);
         if (count > 0) return;
         count++;
-        value += navigation_target + "\n";
+        SimpleDateFormat formatter= new SimpleDateFormat("yyyy-MM-dd 'at' HH:mm:ss");
+        Date date = new Date(System.currentTimeMillis());
+        value += formatter.format(date) + ", " + navigation_target + ".\n";
         mProfileMgr.editHistory(uId, value);
     }
 }
