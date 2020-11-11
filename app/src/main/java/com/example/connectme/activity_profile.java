@@ -39,8 +39,8 @@ public class activity_profile extends AppCompatActivity {
         TextView profile_name = (TextView) findViewById(R.id.profile_name);
         TextView dateOfBirth = (TextView) findViewById(R.id.date_of_birth);
         TextView park_history = (TextView) findViewById(R.id.park_history);
-//        final EditText editHistoryText = findViewById(R.id.edit_history_str);
-//
+        //final EditText editHistoryText = findViewById(R.id.edit_history_str);
+
 //        final Button edit_history = findViewById(R.id.edit_history);
 
         profileMgr.retrieveCurrentProfileName(value -> profile_name.setText(value), uId);
