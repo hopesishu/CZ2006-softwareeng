@@ -140,5 +140,8 @@
     <string name="profile">Profile</string>
     <string name="date_of_birth">Date of birth:</string>
     <string name="feedback">Feedback</string>
+    <string name="about_us">About us</string>
+    <string name="contact_us">Contact us</string>
+    <string name="settings_toolbar">Settings</string>
 
 </resources>

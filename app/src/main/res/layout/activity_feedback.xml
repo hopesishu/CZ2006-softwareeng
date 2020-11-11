@@ -39,6 +39,19 @@
         app:layout_constraintTop_toTopOf="@id/feedback_toolbar"
         app:layout_constraintBottom_toBottomOf="@id/feedback_toolbar"/>
 
+    <TextView
+        android:id="@+id/share_feedback_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="28dp"
+        android:layout_marginBottom="10dp"
+        app:layout_constraintStart_toStartOf="@id/feedback_layout"
+        app:layout_constraintEnd_toEndOf="@id/feedback_layout"
+        app:layout_constraintTop_toBottomOf="@id/feedback_toolbar"
+        app:layout_constraintBottom_toTopOf="@id/feedback_layout"
+        android:textSize="30sp"
+        android:text="Share your feedback!"
+        android:textStyle="bold"/>
 
     <LinearLayout
         android:id="@+id/feedback_layout"
@@ -48,14 +61,13 @@
         android:elevation="6dp"
 
         android:padding="30dp"
-        android:layout_marginTop="40dp"
         android:layout_marginStart="40dp"
         android:layout_marginEnd="40dp"
         android:layout_marginBottom="100dp"
 
         android:background="@drawable/white_rectangle_background"
 
-        app:layout_constraintTop_toBottomOf="@id/feedback_toolbar"
+        app:layout_constraintTop_toBottomOf="@id/share_feedback_text"
         app:layout_constraintBottom_toTopOf="@id/bottomNavigationView"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent">
@@ -75,20 +87,22 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="@color/colorWhite">
+            android:background="@drawable/white_rectangle_bg_stroke"
+            android:padding="12dp"
+            android:layout_marginTop="10dp">
+
             <EditText
                 android:id="@+id/feedback_text"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 app:layout_constraintStart_toStartOf="@id/feedback_header"
                 app:layout_constraintTop_toBottomOf="@id/feedback_header"
-                android:layout_marginTop="20dp"
 
                 android:scrollbars="vertical"
                 android:background="@color/colorWhite"
                 android:textSize="18sp"
-                android:padding="4dp"
                 android:hint="Please enter your feedback here" />
+
         </LinearLayout>
 
     </LinearLayout>
@@ -102,6 +116,7 @@
         android:background="@drawable/button_background"
         android:textColor="@color/colorWhite"
         android:text="Submit Feedback"
+        android:textSize="16sp"
         app:layout_constraintStart_toStartOf="@id/feedback_layout"
         app:layout_constraintEnd_toEndOf="@id/feedback_layout"
         app:layout_constraintTop_toBottomOf="@id/feedback_layout" />

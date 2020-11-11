@@ -39,23 +39,23 @@ public class activity_profile extends AppCompatActivity {
         TextView profile_name = (TextView) findViewById(R.id.profile_name);
         TextView dateOfBirth = (TextView) findViewById(R.id.date_of_birth);
         TextView park_history = (TextView) findViewById(R.id.park_history);
-        final EditText editHistoryText = findViewById(R.id.edit_history_str);
-
-        final Button edit_history = findViewById(R.id.edit_history);
+//        final EditText editHistoryText = findViewById(R.id.edit_history_str);
+//
+//        final Button edit_history = findViewById(R.id.edit_history);
 
         profileMgr.retrieveCurrentProfileName(value -> profile_name.setText(value), uId);
         profileMgr.retrieveCurrentDOB(value -> dateOfBirth.setText(value), uId);
         profileMgr.retrieveHistory(value -> park_history.setText(value), uId);
 
-        edit_history.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                //Log.d(TAG, "onClick: Submit pressed.");
-                String history = activity_profile.this.getInput(editHistoryText);
-                history = park_history.getText() + "\n" + history + ".";
-                profileMgr.editHistory(uId, history);
-            }
-        });
+//        edit_history.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                //Log.d(TAG, "onClick: Submit pressed.");
+//                String history = activity_profile.this.getInput(editHistoryText);
+//                history = park_history.getText() + "\n" + history + ".";
+//                profileMgr.editHistory(uId, history);
+//            }
+//        });
 
         //linking toolbar
         Toolbar toolbar = findViewById(R.id.profile_toolbar);
@@ -73,9 +73,9 @@ public class activity_profile extends AppCompatActivity {
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                 switch(item.getItemId()){
                     case R.id.navigationMap:
-                        //startActivity(new Intent(getApplicationContext(), activity_map.class));
-                        //overridePendingTransition(0,0);
-                        //return true;
+                        startActivity(new Intent(getApplicationContext(), MapsActivity.class));
+                        overridePendingTransition(0,0);
+                        return true;
                     case R.id.navigationInfo:
                         startActivity(new Intent(getApplicationContext(), activity_settings.class));
                         overridePendingTransition(0,0);

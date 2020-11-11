@@ -30,6 +30,10 @@
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".activity_feedback"
+            android:theme="@style/AppTheme.NoActionBar"
+            android:windowSoftInputMode="adjustPan"/>
+        <activity
+            android:name=".activity_aboutus"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".activity_contactus"
@@ -49,7 +53,8 @@
 
 
         <activity android:name=".LoginActivity"
-            android:theme="@style/AppTheme.NoActionBar">
+            android:theme="@style/AppTheme.NoActionBar"
+            android:windowSoftInputMode="adjustPan">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
