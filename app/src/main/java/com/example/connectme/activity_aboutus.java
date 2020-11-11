@@ -2,12 +2,7 @@ package com.example.connectme;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.text.method.ScrollingMovementMethod;
 import android.view.MenuItem;
-import android.view.View;
-import android.widget.Button;
-import android.widget.EditText;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -15,41 +10,15 @@ import androidx.appcompat.widget.Toolbar;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
-import control.AcctMgr;
-import entity.AccountMgrInterface;
-
-public class activity_feedback extends AppCompatActivity {
-
-    private AccountMgrInterface accountMgr;
+public class activity_aboutus extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_feedback);
-
-        accountMgr = new AcctMgr();
-
-        final EditText feedbackText = findViewById(R.id.feedback_text);
-        final Button submitFeedback = findViewById(R.id.submit_feedback);
-
-
-        submitFeedback.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                //Log.d(TAG, "onClick: Submit pressed.");
-                String feedback = activity_feedback.this.getInput(feedbackText);
-                accountMgr.addFeedback(feedback);
-                Toast.makeText(activity_feedback.this, "Feedback submitted!", Toast.LENGTH_SHORT).show();
-                feedbackText.setText("");
-            }
-        });
-
-        //adding scrollbar to edittext field
-        EditText editText = findViewById(R.id.feedback_text);
-        editText.setMovementMethod(new ScrollingMovementMethod());
+        setContentView(R.layout.activity_aboutus);
 
         //linking toolbar
-        Toolbar toolbar = findViewById(R.id.feedback_toolbar);
+        Toolbar toolbar = findViewById(R.id.about_us_toolbar);
         toolbar.setNavigationIcon(R.drawable.ic_arrow_back_24dp);
         toolbar.setNavigationOnClickListener(v -> {
             onBackPressed(); // Implemented by activity
@@ -79,10 +48,6 @@ public class activity_feedback extends AppCompatActivity {
                 return false;
             }
         });
-
-    }
-    public String getInput(EditText editText) {
-        return editText.getText().toString().trim();
     }
 
     @Override
@@ -90,5 +55,4 @@ public class activity_feedback extends AppCompatActivity {
         startActivity(new Intent(this, activity_settings.class));
         finish();
     }
-
 }
