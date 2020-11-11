@@ -117,7 +117,8 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     protected void onCreate(Bundle savedInstanceState) {
         intent_isHawker = getIntent().getBooleanExtra("isHawker", true);
         intent_name = getIntent().getStringExtra("name");
-        //Log.i("intentname", "intent name" + intent_isHawker);
+        Log.i("intentname", "intent name" + intent_name);
+        Log.i("intentishawker", "intent is hawker" + intent_isHawker);
         hasIntent = (intent_name != null);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_maps);

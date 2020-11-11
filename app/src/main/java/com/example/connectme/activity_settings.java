@@ -49,12 +49,10 @@ public class activity_settings extends AppCompatActivity {
                     startActivity(intent);
                 }
                 if (position == 4) {
-                    Intent intent = new Intent(view.getContext(), LoginActivity.class);
-                    startActivity(intent);
+                    openDialog();
                 }
             }
         });
-
 
         //linking bottom navigation bar
         BottomNavigationView bottomNavigationView = findViewById(R.id.bottomNavigationView);
@@ -78,6 +76,12 @@ public class activity_settings extends AppCompatActivity {
                 return false;
             }
         });
+    }
+
+    //open logout dialog
+    public void openDialog(){
+        LogoutDialog logoutDialog = new LogoutDialog();
+        logoutDialog.show(getSupportFragmentManager(), "logout dialog");
     }
 
     class MyAdapter extends ArrayAdapter<String> {
