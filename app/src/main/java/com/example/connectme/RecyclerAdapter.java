@@ -139,7 +139,7 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ViewHo
             Intent intent = new Intent(view.getContext(), MapsActivity.class);
             intent.putExtra("name", select);
             intent.putExtra("isHawker", isHawker);
-            // String select = getIntent().getStringExtra("Location Selected"); //use in maps activity to obtain
+            // String select = intent.getExtras().getString("Location selected"); //use in maps activity to obtain
             view.getContext().startActivity(intent);
         }
     }
