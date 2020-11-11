@@ -374,7 +374,6 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         }
         if (permission_acquired == true){
             moveCameraToUser();
-            calculateNearestPcn();
         }
     }
 
@@ -465,6 +464,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                             current_LatLng =  new LatLng(current_location.getLatitude(), current_location.getLongitude());
                             mMap.addMarker(new MarkerOptions().position(current_LatLng).title("You Are Here!").icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_CYAN)));
                             mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(current_LatLng, 12));
+                            calculateNearestPcn();
                         }
                     }
                 });
