@@ -37,7 +37,7 @@
             android:elevation="4dp"
             android:theme="@style/Theme.MaterialComponents.Light"
             android:text="Park Connectors"
-/>
+            />
 
         <com.google.android.material.chip.Chip
             android:id="@+id/chip_hawker"

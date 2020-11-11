@@ -14,9 +14,11 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 public class MainActivity extends AppCompatActivity implements View.OnClickListener{
 
     private CardView parkConnectorCard, hawkerCentreCard;
+    private String nearestPark;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        nearestPark = getIntent().getStringExtra("nearest");
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
