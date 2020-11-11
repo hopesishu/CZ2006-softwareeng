@@ -2,6 +2,7 @@ package com.example.connectme;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.method.ScrollingMovementMethod;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
@@ -42,6 +43,10 @@ public class activity_feedback extends AppCompatActivity {
                 feedbackText.setText("");
             }
         });
+
+        //adding scrollbar to edittext field
+        EditText editText = findViewById(R.id.feedback_text);
+        editText.setMovementMethod(new ScrollingMovementMethod());
 
         //linking toolbar
         Toolbar toolbar = findViewById(R.id.feedback_toolbar);

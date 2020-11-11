@@ -3,7 +3,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="@color/colorLightGrey">
 
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/feedback_toolbar"
@@ -42,56 +43,68 @@
     <LinearLayout
         android:id="@+id/feedback_layout"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="0dp"
+        android:orientation="vertical"
+        android:elevation="6dp"
 
+        android:padding="30dp"
+        android:layout_marginTop="40dp"
         android:layout_marginStart="40dp"
         android:layout_marginEnd="40dp"
-        android:layout_marginTop="40dp"
+        android:layout_marginBottom="100dp"
+
         android:background="@drawable/white_rectangle_background"
 
         app:layout_constraintTop_toBottomOf="@id/feedback_toolbar"
+        app:layout_constraintBottom_toTopOf="@id/bottomNavigationView"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent">
 
         <TextView
             android:id="@+id/feedback_header"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="40dp"
-            android:layout_marginEnd="40dp"
 
-            android:text="Feedback"
-            android:textSize="18sp"
+            android:text="Let us know what you think"
+            android:gravity="center"
+            android:textSize="20sp"
             android:textColor="@color/colorPrimaryDark"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="@id/feedback_layout" />
 
-        <EditText
-            android:id="@+id/feedback_text"
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:layout_constraintStart_toStartOf="@id/feedback_header"
-            app:layout_constraintTop_toBottomOf="@id/feedback_header"
-            android:layout_marginTop="4dp"
-            android:layout_marginStart="40dp"
-            android:layout_marginEnd="40dp"
+            android:layout_height="match_parent"
+            android:background="@color/colorWhite">
+            <EditText
+                android:id="@+id/feedback_text"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_constraintStart_toStartOf="@id/feedback_header"
+                app:layout_constraintTop_toBottomOf="@id/feedback_header"
+                android:layout_marginTop="20dp"
 
-            android:background="@color/colorWhite"
-            android:textSize="18sp"
-            android:padding="4dp"
-            android:hint="Please type feedback here" />
+                android:scrollbars="vertical"
+                android:background="@color/colorWhite"
+                android:textSize="18sp"
+                android:padding="4dp"
+                android:hint="Please enter your feedback here" />
+        </LinearLayout>
 
     </LinearLayout>
 
     <Button
         android:id="@+id/submit_feedback"
-        android:layout_width="wrap_content"
+        android:layout_width="200dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="192dp"
-        android:layout_marginTop="281dp"
+        android:layout_marginTop="10dp"
+
+        android:background="@drawable/button_background"
+        android:textColor="@color/colorWhite"
         android:text="Submit Feedback"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintStart_toStartOf="@id/feedback_layout"
+        app:layout_constraintEnd_toEndOf="@id/feedback_layout"
+        app:layout_constraintTop_toBottomOf="@id/feedback_layout" />
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/bottomNavigationView"
