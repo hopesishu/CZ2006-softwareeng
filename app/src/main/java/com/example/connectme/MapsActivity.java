@@ -202,7 +202,6 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
     @Override
     public void onMapReady(GoogleMap googleMap) {
-        Log.i("entrance","entrance");
         mMap = googleMap;
         LatLng singapore = new LatLng(1.2903, 103.85);
         mMap.moveCamera(CameraUpdateFactory.newLatLng(singapore));
@@ -304,7 +303,6 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         }
 
 
-
         if (hasIntent){
             if(intent_isHawker){
                 for(GroundOverlay groundOverlay: arrayList_hawker){
@@ -312,7 +310,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                     //Log.i("lengths", Integer.toString(intent_name.length()), );
                     if (((String)groundOverlay.getTag()).equals(intent_name)){
                         intent_temp_marker = mMap.addMarker(new MarkerOptions().position(groundOverlay.getPosition()).title(intent_name).icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_RED)));
-                        Log.i("matchFound", (String)groundOverlay.getTag());
+
                         intent_temp_marker.showInfoWindow();
                         navigation_target = intent_name;
                         navigation_LatLng = groundOverlay.getPosition();
@@ -324,7 +322,6 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                 }
             }
             else{
-                //int count = 0;
                 for (Polyline polyline: arrayList_pcn){
                     if (intent_name.equals(((ArrayList<String>)polyline.getTag()).get(0))){
                         //count++;
