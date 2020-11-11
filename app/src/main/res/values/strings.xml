@@ -139,5 +139,6 @@
     <string name="title_activity_search">title_activity_search</string>
     <string name="profile">Profile</string>
     <string name="date_of_birth">Date of birth:</string>
+    <string name="feedback">Feedback</string>
 
 </resources>

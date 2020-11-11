@@ -6,9 +6,11 @@
     <color name="colorWhite">#FFFFFF</color>
     <color name="colorBlack">#000000</color>
     <color name="colorGrey">#9E9E9E</color>
+    <color name="colorLightGrey">#E7EFF3</color>
     <color name="yellow">#FFFF00</color>
     <color name="red">#FF0000</color>
     <color name="green">#32CD32</color>
     <color name="transparent">#10000000</color>
+    E7EFF3
 
 </resources>

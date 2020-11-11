@@ -1,13 +1,17 @@
 package com.example.connectme;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.SearchView;
 import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -28,61 +32,78 @@ public class SearchActivity extends AppCompatActivity {
     ArrayList<String> parkDatabaseList;
     List<Object> polylineList;
     boolean isHawker = true;
+    boolean flag = true;
     Random r;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        String select = getIntent().getStringExtra("Search Option");
-        if (select == "park") {
-
-        }
+        Intent intent = getIntent();
+        int select = intent.getExtras().getInt("SEARCH_OPTION");
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_search);
         parkDatabaseList = Park.getParkDatabase();
         ArrayList<ArrayList<String>> listOfLists = new ArrayList<ArrayList<String>>();
-//        if (select == "hawker"){
-//            //call hawker list, listOfLists = function
-//        }
-//        else if (select == "park"){
-//            isHawker = false;
-//            //call park list, listOfLists = function
-//            for (int i=0; i<listOfLists.size(); i++) {
-//                r = new Random();
-//                int ranNum = r.nextInt(20);
-//                listOfLists.get(i).set(2, parkDatabaseList.get(ranNum));
-//            }
-//        }
+        ArrayList<ArrayList<String>> tempList = new ArrayList<ArrayList<String>>();
 
-        ArrayList<String> list1 = new ArrayList<String>();
-        list1.add("Jurong West Hawker center");
-        list1.add("Jurong West st 100");
-        list1.add("https://www.nea.gov.sg/images/default-source/Hawker-Centres-Division/resize_1262155861677.jpg");
-        list1.add("polyline");
-        listOfLists.add(list1);
+        if (select == 1){
 
-        ArrayList<String> anotherList = new ArrayList<String>();
+            listOfLists = MapsActivity.database_hawker.getDatabase();
+        }
+        else if (select == 2){
+            isHawker = false;
+            listOfLists = MapsActivity.database_pcn.getDatabase();
+            for (int i=0; i<listOfLists.size()-1; i++){
+                for (int j=i+1; j<listOfLists.size(); j++) {
+                    if (listOfLists.get(i).get(0).equals(listOfLists.get(j).get(0))) {
+                        flag = false;
+                    }
+                }
+                if (flag) {
+                    tempList.add(listOfLists.get(i));
 
-        anotherList.add("Taman Jurong Hawker");
-        anotherList.add("Yung Ho Road");
-        anotherList.add("http://www.nea.gov.sg/images/default-source/Hawker-Centres-Division/resize_1267879560483.jpg");
-        anotherList.add("polyline");
-        listOfLists.add(anotherList);
+                }
+                flag =true;
+            }
+            listOfLists = tempList;
+            for (int i=0; i<listOfLists.size(); i++) {
+                r = new Random();
+                int ranNum = r.nextInt(60);
+                listOfLists.get(i).set(2, parkDatabaseList.get(ranNum));
+            }
+        }
+       // listOfLists = MapsActivity.database_hawker.getDatabase();
 
-        ArrayList<String> anotherList2 = new ArrayList<String>();
 
-        anotherList2.add("Ellias Mall Hawker");
-        anotherList2.add("Pasir Ris");
-        anotherList2.add("http://www.nea.gov.sg/images/default-source/Hawker-Centres-Division/resize_1262154766447.jpg");
-        anotherList2.add("polyline");
-        listOfLists.add(anotherList2);
-
-        ArrayList<String> anotherList3 = new ArrayList<String>();
-
-        anotherList3.add("Tampines Hawker");
-        anotherList3.add("Tampines");
-        anotherList3.add("http://www.nea.gov.sg/images/default-source/Hawker-Centres-Division/resize_1267846802175.jpg");
-        anotherList3.add("polyline");
-        listOfLists.add(anotherList3);
+//        ArrayList<String> list1 = new ArrayList<String>();
+//        list1.add("Jurong West Hawker center");
+//        list1.add("Jurong West st 100");
+//        list1.add("https://www.nea.gov.sg/images/default-source/Hawker-Centres-Division/resize_1262155861677.jpg");
+//        list1.add("polyline");
+//        listOfLists.add(list1);
+//
+//        ArrayList<String> anotherList = new ArrayList<String>();
+//
+//        anotherList.add("Taman Jurong Hawker");
+//        anotherList.add("Yung Ho Road");
+//        anotherList.add("http://www.nea.gov.sg/images/default-source/Hawker-Centres-Division/resize_1267879560483.jpg");
+//        anotherList.add("polyline");
+//        listOfLists.add(anotherList);
+//
+//        ArrayList<String> anotherList2 = new ArrayList<String>();
+//
+//        anotherList2.add("Ellias Mall Hawker");
+//        anotherList2.add("Pasir Ris");
+//        anotherList2.add("http://www.nea.gov.sg/images/default-source/Hawker-Centres-Division/resize_1262154766447.jpg");
+//        anotherList2.add("polyline");
+//        listOfLists.add(anotherList2);
+//
+//        ArrayList<String> anotherList3 = new ArrayList<String>();
+//
+//        anotherList3.add("Tampines Hawker");
+//        anotherList3.add("Tampines");
+//        anotherList3.add("http://www.nea.gov.sg/images/default-source/Hawker-Centres-Division/resize_1267846802175.jpg");
+//        anotherList3.add("polyline");
+//        listOfLists.add(anotherList3);
 
         nameList = new ArrayList<>();
         addressList = new ArrayList<>();
@@ -101,35 +122,12 @@ public class SearchActivity extends AppCompatActivity {
                 }
             }
         }
-        // add in list for polyline
 
+        if (nameList.size() <1)
+        {
+            openDialog();
+        }
 
-
-
-        moviesList = new ArrayList<>();
-        moviesList.add("Iron Man");
-        moviesList.add("The Incredible Hulk");
-        moviesList.add("Iron Man 2");
-        moviesList.add("Thor");
-        moviesList.add("Captain America: The First Avenger");
-        moviesList.add("The Avengers");
-        moviesList.add("Iron Man 3");
-        moviesList.add("Thor: The Dark World");
-        moviesList.add("Captain America: The Winter Soldier");
-        moviesList.add("Guardians of the Galaxy");
-        moviesList.add("Avengers: Age of Ultron");
-        moviesList.add("Ant-Man");
-        moviesList.add("Captain America: Civil War");
-        moviesList.add("Doctor Strange");
-        moviesList.add("Guardians of the Galaxy Vol. 2");
-        moviesList.add("Spider-Man: Homecoming");
-        moviesList.add("Thor: Ragnarok");
-        moviesList.add("Black Panther");
-        moviesList.add("Avengers: Infinity War");
-        moviesList.add("Ant-Man and the Wasp");
-        moviesList.add("Captain Marvel");
-        moviesList.add("Avengers: Endgame");
-        moviesList.add("Spider-Man: Far From Home");
 
         recyclerView = findViewById(R.id.recyclerView);
         recyclerAdapter = new RecyclerAdapter(nameList, addressList, urlList, isHawker);
@@ -138,6 +136,32 @@ public class SearchActivity extends AppCompatActivity {
 
         DividerItemDecoration dividerItemDecoration = new DividerItemDecoration(this, DividerItemDecoration.VERTICAL);
         recyclerView.addItemDecoration(dividerItemDecoration);
+
+
+        //linking bottom navigation bar
+        BottomNavigationView bottomNavigationView = findViewById(R.id.bottomNavigationView);
+        bottomNavigationView.setSelectedItemId(R.id.navigationHome);
+
+        bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                switch(item.getItemId()){
+                    case R.id.navigationMap:
+                        //startActivity(new Intent(getApplicationContext(), activity_map.class));
+                        //overridePendingTransition(0,0);
+                        //return true;
+                    case R.id.navigationInfo:
+                        startActivity(new Intent(getApplicationContext(), activity_settings.class));
+                        overridePendingTransition(0,0);
+                        return true;
+                    case R.id.navigationHome:
+                        startActivity(new Intent(getApplicationContext(), MainActivity.class));
+                        overridePendingTransition(0,0);
+                        return true;
+                }
+                return false;
+            }
+        });
     }
 
     @Override
@@ -162,4 +186,10 @@ public class SearchActivity extends AppCompatActivity {
 
         return super.onCreateOptionsMenu(menu);
     }
+
+    public void openDialog(){
+        LocationPermissionDialog locationPermissionDialog = new LocationPermissionDialog();
+        locationPermissionDialog.show(getSupportFragmentManager(), "location permission dialog");
+    }
+
 }
