@@ -17,6 +17,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
+import control.HawkerCtrl;
+import control.PCNCtrl;
 import entity.Park;
 
 
@@ -47,11 +49,11 @@ public class SearchActivity extends AppCompatActivity {
 
         if (select == 1){
 
-            listOfLists = MapsActivity.database_hawker.getDatabase();
+            listOfLists = HawkerCtrl.getDatabase_hawker().getDatabase();
         }
         else if (select == 2){
             isHawker = false;
-            listOfLists = MapsActivity.database_pcn.getDatabase();
+            listOfLists = PCNCtrl.getDatabase_pcn().getDatabase();
             for (int i=0; i<listOfLists.size()-1; i++){
                 for (int j=i+1; j<listOfLists.size(); j++) {
                     if (listOfLists.get(i).get(0).equals(listOfLists.get(j).get(0))) {
